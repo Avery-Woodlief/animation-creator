@@ -31,7 +31,7 @@ def drawing(settings, assigned_points, event, continuous):
                 
     if (not continuous):
         assigned_points = list(dict.fromkeys(assigned_points))
-        print(len(assigned_points))
+        #print(len(assigned_points))
 
 def play_animation(settings, path):
 
