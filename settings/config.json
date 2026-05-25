@@ -1,0 +1,17 @@
+{
+    "screen": {
+        "width": 500,
+        "height": 500,
+        "bg-color": [
+            255,
+            255,
+            255
+        ]
+    },
+    "general": {
+        "frame cap": 60
+    },
+    "animation": {
+        "FPS": 60
+    }
+}
