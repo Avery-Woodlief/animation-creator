@@ -1,6 +1,7 @@
 import json
 import pygame
 import os
+from drawer import*
 
 
 def init_animation():
@@ -29,36 +30,6 @@ def init_animation():
 my_animation = {}
 name_of_animation = init_animation()
 
-
-
-        
-
-def drawing(settings, assigned_points, event, continuous):
-
-    if (continuous):
-        mouse = pygame.mouse.get_pressed()
-    screen.fill(settings["screen"]["bg-color"])
-    for point in assigned_points:
-        pygame.draw.circle(screen, (0, 0, 255), point, 10)
-        #x, y = point
-        #pygame.draw.rect(screen, (255, 0, 0), (x, y, 50, 50))
-    if (continuous):
-        if (mouse[0]):
-            #x, y = pygame.mouse.get_pos()
-            #pygame.draw.rect(screen, (255, 0, 0), (x, y, 50, 50))
-            pygame.draw.circle(screen, (255, 0, 0), pygame.mouse.get_pos(), 2)
-            assigned_points.append(pygame.mouse.get_pos())
-    elif (not continuous):
-        if (event.type == pygame.MOUSEBUTTONDOWN):
-            if (event.button == 1):  
-                #x, y = pygame.mouse.get_pos()
-                #pygame.draw.rect(screen, (255, 0, 0), (x, y, 50, 50))
-                pygame.draw.circle(screen, (255, 0, 0), pygame.mouse.get_pos(), 2)
-                assigned_points.append(pygame.mouse.get_pos())
-                
-    if (not continuous):
-        assigned_points = list(dict.fromkeys(assigned_points))
-        #print(len(assigned_points))
 
 def play_animation(settings, path):
 
@@ -89,6 +60,10 @@ running = True
 
 menu = {"selection" : False, "drawing":False, "play current work": False}
 
+
+draw_helper = Drawer(settings, screen)
+draw_helper.init_animation(name_of_animation)
+
 while running:
 
     for event in pygame.event.get():
@@ -115,11 +90,13 @@ while running:
 
     if (menu["drawing"]):
         continuous = 0
-        drawing(settings, assigned_points, event, continuous)
+        #drawing(settings, assigned_points, event, continuous)
+        draw_helper.drawing(event)
         if (not continuous):
-            assigned_points = list(dict.fromkeys(assigned_points))
+            #assigned_points = list(dict.fromkeys(assigned_points))
+            draw_helper.raw_animations[draw_helper.current_working_name] = list(dict.fromkeys(draw_helper.raw_animations[draw_helper.current_working_name]))
     elif (menu["play current work"]):
-        play_animation(settings, assigned_points)
+        play_animation(settings, draw_helper.raw_animations[draw_helper.current_working_name])
 
         menu["play current work"] = False
     elif (menu["selection"]):
@@ -130,9 +107,9 @@ while running:
 
 position_differences = []
 
-for i in range(1, len(assigned_points)):
-    point_i_MINUS_ONE = assigned_points[i - 1]
-    point_i = assigned_points[i]
+for i in range(1, len(draw_helper.raw_animations[draw_helper.current_working_name])):
+    point_i_MINUS_ONE = draw_helper.raw_animations[draw_helper.current_working_name][i - 1]
+    point_i = draw_helper.raw_animations[draw_helper.current_working_name][i]
     position_differences.append((point_i[0] - point_i_MINUS_ONE[0], point_i[1] - point_i_MINUS_ONE[1]))
 
 
@@ -146,7 +123,7 @@ for i in range(len(position_differences)):
         dy += position_differences[j][1]
     formatted.append((dx, dy))
 
-my_animation["path raw"] = assigned_points
+my_animation["path raw"] = draw_helper.raw_animations[draw_helper.current_working_name]
 my_animation["path position independent"] = formatted # position_differences
 
 
