@@ -13,7 +13,7 @@ That is, for the first step, call it $S_1 = (ddx, ddy)$, just add them together!
 To execute the animation just do $P + S_i$ for the $i^{th}$ step of the animation, but do not change the value of P!
 That is how you use the "abstract_motion.json"!
 <br>
-How the files are calculated:
+**How the files are calculated:**
 Given a "raw.json" file with a list of positions (for the animation), Q0, Q1, Q2, ..., QN each being equal to (xi, yi) where i is the position in the list.
 "abstract_motion.json" is a list of 2 element lists, call them (ddxi, ddyi).
 ddxi := (x1 - x0) + (x2 - x1) + ... + (xi - x_{i - 1})
