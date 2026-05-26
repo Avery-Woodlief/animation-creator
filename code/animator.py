@@ -92,8 +92,8 @@ while running:
     if (menu["drawing"]):
         continuous = 1
         draw_helper.drawing(event, continuous)
-        if (not continuous):
-            draw_helper.raw_animations[draw_helper.current_working_name] = list(dict.fromkeys(draw_helper.raw_animations[draw_helper.current_working_name]))
+        #if (not continuous):
+            #draw_helper.raw_animations[draw_helper.current_working_name] = list(dict.fromkeys(draw_helper.raw_animations[draw_helper.current_working_name]))
     elif (menu["play current work"]):
         play_animation(settings, draw_helper.raw_animations[draw_helper.current_working_name])
 
@@ -103,24 +103,13 @@ while running:
     pygame.display.flip()
 
 
-
 for name in draw_helper.names:
-
-    position_differences = []
-
-    for i in range(1, len(draw_helper.raw_animations[name])):
-        point_i_MINUS_ONE = draw_helper.raw_animations[name][i - 1]
-        point_i = draw_helper.raw_animations[name][i]
-        position_differences.append((point_i[0] - point_i_MINUS_ONE[0], point_i[1] - point_i_MINUS_ONE[1]))
-
-    for i in range(len(position_differences)):
-        dx = position_differences[i][0]
-        dy = position_differences[i][1]
-        for j in range(i):
-            dx += position_differences[j][0]
-            dy += position_differences[j][1]
-        draw_helper.formatted_animations[name].append((dx, dy))
-
+    draw_helper.formatted_animations[name] = []
+    for raw_point in draw_helper.raw_animations[name]:
+        dx = raw_point[0] - draw_helper.raw_animations[name][0][0]
+        dy = raw_point[1] - draw_helper.raw_animations[name][0][1]
+        draw_helper.formatted_animations[name].append([dx, dy])
+    #print(draw_helper.formatted_animations[name])
 
 raw_paths = {}
 abstract_motion_paths = {}
@@ -130,14 +119,28 @@ for name in draw_helper.names:
     raw_paths[name] = draw_helper.raw_animations[name]
     abstract_motion_paths[name] = draw_helper.formatted_animations[name]
 
-with open(f"../animations/{name_of_animation_dir}/raw.json", "w+") as file:
-    json.dump(raw_paths, file, indent=4)
-    file.close() 
 
-with open(f"../animations/{name_of_animation_dir}/abstract_motion.json", "w+") as file:
+#print("BEFORE DUMPING")
+#print(abstract_motion_paths["circle"])
+
+with open(f"../animations/{name_of_animation_dir}/raw.json", "w") as file:
+
+    json.dump(raw_paths, file, indent=4)
+
+with open(f"../animations/{name_of_animation_dir}/abstract_motion.json", "w") as file:
+
     json.dump(abstract_motion_paths, file, indent=4)
-    file.close()
     
+
+#with open(f"../animations/{name_of_animation_dir}/abstract_motion.json", "r") as file:
+#    test = json.load(file)
+
+
+#print("AFTER DUMPING")
+#print(test)
+
+#for name in draw_helper.names:
+    #print(abstract_motion_paths[name])
 
 # default is to have it run at 60 frames per second
 

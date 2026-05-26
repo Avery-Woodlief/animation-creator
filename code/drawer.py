@@ -48,7 +48,7 @@ class Drawer:
                     #assigned_points.append(pygame.mouse.get_pos())
                     self.raw_animations[self.current_working_name].append(pygame.mouse.get_pos())
                     
-        if (not continuous):
+        #if (not continuous):
             # removes duplicate positions but preserves order
-            self.raw_animations[self.current_working_name] = list(dict.fromkeys(self.raw_animations[self.current_working_name]))
+            #self.raw_animations[self.current_working_name] = list(dict.fromkeys(self.raw_animations[self.current_working_name]))
             
