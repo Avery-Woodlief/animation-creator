@@ -44,6 +44,7 @@
         "FPS": 60,
         "frames count": 10,
         "lifetime": 0.16666666666666666,
-        "smooth": false
+        "smooth": false,
+        "points per segment": 5
     }
 }

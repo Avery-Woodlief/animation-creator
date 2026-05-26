@@ -72,15 +72,18 @@ while running:
     keys = pygame.key.get_pressed()
     mouse = pygame.mouse.get_pressed()
 
-    clock.tick(settings["general"]["frame cap"])
+    #clock.tick(settings["general"]["frame cap"])
+    clock.tick(30)
 
     if keys[pygame.K_1]:
         for k in menu.keys():
             menu[k] = False
+        #clock.tick(settings["general"]["frame cap"])
         menu["play current work"] = True
     elif keys[pygame.K_2]:
         for k in menu.keys():
             menu[k] = False
+        #clock.tick(1)
         menu["drawing"] = True
     elif keys[pygame.K_3]:
         for k in menu.keys():
@@ -96,12 +99,39 @@ while running:
             #draw_helper.raw_animations[draw_helper.current_working_name] = list(dict.fromkeys(draw_helper.raw_animations[draw_helper.current_working_name]))
     elif (menu["play current work"]):
         play_animation(settings, draw_helper.raw_animations[draw_helper.current_working_name])
+        #print(pygame.draw.lines(screen, (0, 0, 255), False, draw_helper.raw_animations[draw_helper.current_working_name], 10))
 
         menu["play current work"] = False
     elif (menu["selection"]):
         screen.fill(settings["display"]["colors"]["color-black"])
     pygame.display.flip()
 
+def f(x, point, slope):
+    return point[1] + slope * (x - point[0])
+
+import numpy as np
+
+if (settings["animation"]["smooth"]):
+    for name in draw_helper.names:
+        pointA = []
+        pointB = []
+        new_raw_points = []
+        for i in range(1, len(draw_helper.raw_animations[name])):
+            try:
+                pointA = draw_helper.raw_animations[name][i - 1]
+                pointB = draw_helper.raw_animations[name][i]
+                new_raw_points.append(pointA)
+                slope = (pointB[1] - pointA[1])/(pointB[0] - pointA[0])
+                #y = pointA[1] + slope * (x - pointA[0])
+                step = (pointB[0] - pointA[0])/(settings["animation"]["points per segment"])
+                domain = [x for x in np.arange(pointA[0] + step, pointB[0], step)]
+                
+                for x in domain:
+                    new_raw_points.append((x, f(x, pointA, slope)))
+            except (ZeroDivisionError) as e:
+                continue
+            new_raw_points.append(pointB)
+        draw_helper.raw_animations[name] = new_raw_points
 
 for name in draw_helper.names:
     draw_helper.formatted_animations[name] = []

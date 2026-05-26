@@ -4,7 +4,7 @@ import json
 #f_type = "raw.json"
 f_type = "abstract_motion.json"
 
-with open(f"../animations/test11/{f_type}", "r") as file:
+with open(f"../animations/smoothness_test/{f_type}", "r") as file:
     FILE = json.load(file)
 
 #print("BEFORE RE")
@@ -18,15 +18,22 @@ motion = FILE["circle"]
 
 a = 0#motion[0][0]
 b = 0#motion[0][1]
-
-pattern = r"^\[-?\d+\,\s*-?\d+\]$"
+#"-?\d+\.\d+\,\s*-?\d+\.\d+"
+pattern=r"^\[-?(\d+\.\d+|\.\d+|\d+)\,\s*-?(\d+\.\d+|\.\d+|\d+)\]$"
+#pattern = r"^\[-?\d+\,\s*-?\d+\]$"
 
 desmos_formatted_string = "["
 
 if (re.fullmatch(pattern, str(motion[0]))):
-    d1, d2 = re.findall(r"-?\d+", str(motion[0]))
-    d1 = int(d1)
-    d2 = int(d2)
+    d1, d2 = re.findall(r"-?(\d+\.\d+|\.\d+|\d+)", str(motion[0]))
+    try:
+        d1 = int(d1)
+    except (ValueError):
+        d1 = float(d1)
+    try:
+        d2 = int(d2)
+    except (ValueError):
+        d2 = float(d2)
     desmos_formatted_string += f"({d1 - a}, {d2 - b})"
 
 skip_first = True
@@ -38,11 +45,17 @@ for point in motion:
         continue
 
     if (re.fullmatch(pattern, str(point))):
-        d1, d2 = re.findall(r"-?\d+", str(point))
-        d1 = int(d1)
-        d2 = int(d2)
+        d1, d2 = re.findall(r"-?(\d+\.\d+|\.\d+|\d+)", str(point))
+        try:
+            d1 = int(d1)
+        except (ValueError):
+            d1 = float(d1)
+        try:
+            d2 = int(d2)
+        except (ValueError):
+            d2 = float(d2)
         desmos_formatted_string += f", ({d1 - a}, {d2 - b})"
 
 desmos_formatted_string += "]"
 
-#print(desmos_formatted_string)
+print(desmos_formatted_string)

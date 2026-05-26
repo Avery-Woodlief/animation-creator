@@ -27,9 +27,12 @@ class Drawer:
         if (continuous):
             mouse = pygame.mouse.get_pressed()
         self.screen.fill(self.settings["display"]["colors"]["color-white"])
-            
+        if (len(self.raw_animations[self.current_working_name]) >= 2):
+            pygame.draw.lines(self.screen, (0, 0, 255), False, self.raw_animations[self.current_working_name], 10)
         for point in self.raw_animations[self.current_working_name]:#assigned_points:
             pygame.draw.circle(self.screen, (0, 0, 255), point, 10)
+            
+            
             #x, y = point
             #pygame.draw.rect(screen, (255, 0, 0), (x, y, 50, 50))
         if (continuous):

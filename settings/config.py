@@ -21,6 +21,8 @@ settings["general"] = {"frame cap":60}
 settings["animation"] = {"FPS":60, "frames count":10}
 settings["animation"]["lifetime"] = settings["animation"]["frames count"]/settings["animation"]["FPS"] # lifetime measured in seconds
 settings["animation"]["smooth"] = False # if set to True, program will try to make the animation less 'blocky' in movement
+settings["animation"]["points per segment"] = 5 # this is effectively how detailed each line will be for smoothness
+
 
 with open("config.json", "w+") as file:
     json.dump(settings, file, indent=4)
