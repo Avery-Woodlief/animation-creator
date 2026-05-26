@@ -1,17 +1,49 @@
 {
-    "screen": {
-        "width": 500,
-        "height": 500,
-        "bg-color": [
-            255,
-            255,
-            255
-        ]
+    "display": {
+        "screen-size": {
+            "width": 500,
+            "height": 500
+        },
+        "colors": {
+            "color-white": [
+                255,
+                255,
+                255
+            ],
+            "color-black": [
+                0,
+                0,
+                0
+            ],
+            "color-grey": [
+                50,
+                50,
+                50
+            ],
+            "color-bright-red": [
+                255,
+                0,
+                0
+            ],
+            "color-bright-green": [
+                0,
+                255,
+                0
+            ],
+            "color-bright-blue": [
+                0,
+                0,
+                255
+            ]
+        }
     },
     "general": {
         "frame cap": 60
     },
     "animation": {
-        "FPS": 60
+        "FPS": 60,
+        "frames count": 10,
+        "lifetime": 0.16666666666666666,
+        "smooth": false
     }
 }
