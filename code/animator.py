@@ -39,7 +39,7 @@ def play_animation(settings, path):
         
         clock.tick(settings["animation"]["FPS"])
 
-        screen.fill(tuple(settings["screen"]["bg-color"]))
+        screen.fill(tuple(settings["display"]["colors"]["color-white"]))
         pygame.draw.circle(screen, (0, 0, 0), point, R)
         pygame.display.flip()
 
@@ -49,7 +49,7 @@ with open("../settings/config.json", "r") as file:
 
 
 pygame.init()
-screen = pygame.display.set_mode((settings["screen"]["width"], settings["screen"]["height"]))
+screen = pygame.display.set_mode((settings["display"]["screen-size"]["width"], settings["display"]["screen-size"]["height"]))
 
 clock = pygame.time.Clock()
 
@@ -90,8 +90,8 @@ while running:
         draw_helper.init_animation(animation_name)
 
     if (menu["drawing"]):
-        continuous = 0
-        draw_helper.drawing(event)
+        continuous = 1
+        draw_helper.drawing(event, continuous)
         if (not continuous):
             draw_helper.raw_animations[draw_helper.current_working_name] = list(dict.fromkeys(draw_helper.raw_animations[draw_helper.current_working_name]))
     elif (menu["play current work"]):
@@ -99,7 +99,7 @@ while running:
 
         menu["play current work"] = False
     elif (menu["selection"]):
-        screen.fill((0, 0, 0))
+        screen.fill(settings["display"]["colors"]["color-black"])
     pygame.display.flip()
 
 

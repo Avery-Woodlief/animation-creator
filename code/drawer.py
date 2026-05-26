@@ -1,34 +1,5 @@
 import pygame
 
-'''
-def drawing(settings, assigned_points, event, continuous):
-
-    if (continuous):
-        mouse = pygame.mouse.get_pressed()
-    screen.fill(settings["screen"]["bg-color"])
-    for point in assigned_points:
-        pygame.draw.circle(screen, (0, 0, 255), point, 10)
-        #x, y = point
-        #pygame.draw.rect(screen, (255, 0, 0), (x, y, 50, 50))
-    if (continuous):
-        if (mouse[0]):
-            #x, y = pygame.mouse.get_pos()
-            #pygame.draw.rect(screen, (255, 0, 0), (x, y, 50, 50))
-            pygame.draw.circle(screen, (255, 0, 0), pygame.mouse.get_pos(), 2)
-            assigned_points.append(pygame.mouse.get_pos())
-    elif (not continuous):
-        if (event.type == pygame.MOUSEBUTTONDOWN):
-            if (event.button == 1):  
-                #x, y = pygame.mouse.get_pos()
-                #pygame.draw.rect(screen, (255, 0, 0), (x, y, 50, 50))
-                pygame.draw.circle(screen, (255, 0, 0), pygame.mouse.get_pos(), 2)
-                assigned_points.append(pygame.mouse.get_pos())
-                
-    if (not continuous):
-        assigned_points = list(dict.fromkeys(assigned_points))
-        #print(len(assigned_points))
-'''
-
 
 class Drawer:
 
@@ -55,7 +26,7 @@ class Drawer:
     def drawing(self, event, continuous=0):
         if (continuous):
             mouse = pygame.mouse.get_pressed()
-        self.screen.fill(self.settings["screen"]["bg-color"])
+        self.screen.fill(self.settings["display"]["colors"]["color-white"])
             
         for point in self.raw_animations[self.current_working_name]:#assigned_points:
             pygame.draw.circle(self.screen, (0, 0, 255), point, 10)
