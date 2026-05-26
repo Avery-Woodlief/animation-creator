@@ -10,7 +10,7 @@ How to use "abstract_motion.json":
 suppose the starting position is $P = (x_0, y_0)$.
  2) After the .json file is imported, each element in the list tells where P needs to go, relative to P.
 That is, for the first step, call it $S_1 = (ddx, ddy)$, just add them together!
-To execute the animation just do $P + S_i$ for the i^{th} step of the animation, but do not change the value of P!
+To execute the animation just do $P + S_i$ for the $i^{th}$ step of the animation, but do not change the value of P!
 That is how you use the "abstract_motion.json"!
 =================================================================================================================
 How the files are calculated:
