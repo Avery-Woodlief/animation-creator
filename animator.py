@@ -45,29 +45,12 @@ def play_animation(settings, path):
         pygame.draw.circle(screen, (0, 0, 0), point, R)
         pygame.display.flip()
 
-'''
-def play_animation2(settings, changes, start):
-
-    R = 2
-
-    for change in changes:
-        
-        dx, dy = change
-
-        clock.tick(settings["animation"]["FPS"])
-
-        screen.fill(tuple(settings["screen"]["bg-color"]))
-        pygame.draw.circle(screen, (0, 0, 0), (start[0] + dx, start[1] + dy), R)
-        pygame.display.flip()
-'''
 
 with open("settings/config.json", "r") as file:
     settings = json.load(file)
 
-#path = [(i + 100, 100) for i in range(0, 120, 2)]
-assigned_points = []
 
-#print(len(path))
+assigned_points = []
 
 
 pygame.init()
@@ -110,13 +93,12 @@ while running:
             assigned_points = list(dict.fromkeys(assigned_points))
     elif (menu["play current work"]):
         play_animation(settings, assigned_points)
-        #play_animation2(settings, my_animation["path position independent"], (50, 50))
+
         menu["play current work"] = False
     elif (menu["selection"]):
         screen.fill((0, 0, 0))
     pygame.display.flip()
 
-#print(assigned_points)
 
 
 position_differences = []
@@ -138,7 +120,7 @@ for i in range(len(position_differences)):
     formatted.append((dx, dy))
 
 my_animation["path raw"] = assigned_points
-my_animation["path position independent"] = formatted#position_differences
+my_animation["path position independent"] = formatted # position_differences
 
 import os
 
