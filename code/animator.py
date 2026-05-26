@@ -6,7 +6,7 @@ import os
 def init_animation():
 
     name_of_animation = input("name your animation: ")
-    parent = "animations"
+    parent = "../animations"
     folder_name = f"{name_of_animation}"
     path = os.path.join(parent, folder_name)
 
@@ -73,7 +73,7 @@ def play_animation(settings, path):
         pygame.display.flip()
 
 
-with open("settings/config.json", "r") as file:
+with open("../settings/config.json", "r") as file:
     settings = json.load(file)
 
 
@@ -152,10 +152,10 @@ my_animation["path position independent"] = formatted # position_differences
 
 
 
-with open(f"animations/{name_of_animation}/raw.json", "w+") as file:
+with open(f"../animations/{name_of_animation}/raw.json", "w+") as file:
     json.dump(my_animation["path raw"], file, indent=4)
 
-with open(f"animations/{name_of_animation}/abstract_motion.json", "w+") as file:
+with open(f"../animations/{name_of_animation}/abstract_motion.json", "w+") as file:
     json.dump(my_animation["path position independent"], file, indent=4)
 
 # default is to have it run at 60 frames per second
