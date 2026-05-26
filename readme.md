@@ -39,7 +39,7 @@ $$
 P + S_i
 $$
 
-for the \(i^{th}\) step of the animation, but do **not** change the value of \(P\).
+for the $i^{th}$ step of the animation, but do **not** change the value of \(P\).
 
 That is how you use `abstract_motion.json`!
 
