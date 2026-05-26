@@ -4,11 +4,11 @@ import os
 from drawer import*
 
 
-def init_animation():
+def init_animation_dir():
 
-    name_of_animation = input("name your animation: ")
+    name_of_animation_dir = input("name your animation directory: ")
     parent = "../animations"
-    folder_name = f"{name_of_animation}"
+    folder_name = f"{name_of_animation_dir}"
     path = os.path.join(parent, folder_name)
 
     already_exists = True
@@ -23,12 +23,12 @@ def init_animation():
                 os.makedirs(path, exist_ok=True)
                 already_exists = False
             elif (resp == "N"):
-                name_of_animation = input("name your animation: ")
+                name_of_animation_dir = input("name your animation directory: ")
                 continue
-    return name_of_animation
+    return name_of_animation_dir
 
 my_animation = {}
-name_of_animation = init_animation()
+name_of_animation_dir = init_animation_dir()
 
 
 def play_animation(settings, path):
@@ -48,9 +48,6 @@ with open("../settings/config.json", "r") as file:
     settings = json.load(file)
 
 
-assigned_points = []
-
-
 pygame.init()
 screen = pygame.display.set_mode((settings["screen"]["width"], settings["screen"]["height"]))
 
@@ -61,8 +58,10 @@ running = True
 menu = {"selection" : False, "drawing":False, "play current work": False}
 
 
+animation_name = input("choose name for first animation: ")
+
 draw_helper = Drawer(settings, screen)
-draw_helper.init_animation(name_of_animation)
+draw_helper.init_animation(animation_name)
 
 while running:
 
@@ -87,13 +86,13 @@ while running:
         for k in menu.keys():
             menu[k] = False
         menu["selection"] = True
+        animation_name = input("choose name for next animation: ")
+        draw_helper.init_animation(animation_name)
 
     if (menu["drawing"]):
         continuous = 0
-        #drawing(settings, assigned_points, event, continuous)
         draw_helper.drawing(event)
         if (not continuous):
-            #assigned_points = list(dict.fromkeys(assigned_points))
             draw_helper.raw_animations[draw_helper.current_working_name] = list(dict.fromkeys(draw_helper.raw_animations[draw_helper.current_working_name]))
     elif (menu["play current work"]):
         play_animation(settings, draw_helper.raw_animations[draw_helper.current_working_name])
@@ -105,35 +104,40 @@ while running:
 
 
 
-position_differences = []
+for name in draw_helper.names:
 
-for i in range(1, len(draw_helper.raw_animations[draw_helper.current_working_name])):
-    point_i_MINUS_ONE = draw_helper.raw_animations[draw_helper.current_working_name][i - 1]
-    point_i = draw_helper.raw_animations[draw_helper.current_working_name][i]
-    position_differences.append((point_i[0] - point_i_MINUS_ONE[0], point_i[1] - point_i_MINUS_ONE[1]))
+    position_differences = []
 
+    for i in range(1, len(draw_helper.raw_animations[name])):
+        point_i_MINUS_ONE = draw_helper.raw_animations[name][i - 1]
+        point_i = draw_helper.raw_animations[name][i]
+        position_differences.append((point_i[0] - point_i_MINUS_ONE[0], point_i[1] - point_i_MINUS_ONE[1]))
 
-formatted = []
-
-for i in range(len(position_differences)):
-    dx = position_differences[i][0]
-    dy = position_differences[i][1]
-    for j in range(i):
-        dx += position_differences[j][0]
-        dy += position_differences[j][1]
-    formatted.append((dx, dy))
-
-my_animation["path raw"] = draw_helper.raw_animations[draw_helper.current_working_name]
-my_animation["path position independent"] = formatted # position_differences
+    for i in range(len(position_differences)):
+        dx = position_differences[i][0]
+        dy = position_differences[i][1]
+        for j in range(i):
+            dx += position_differences[j][0]
+            dy += position_differences[j][1]
+        draw_helper.formatted_animations[name].append((dx, dy))
 
 
+raw_paths = {}
+abstract_motion_paths = {}
 
+for name in draw_helper.names:
+    
+    raw_paths[name] = draw_helper.raw_animations[name]
+    abstract_motion_paths[name] = draw_helper.formatted_animations[name]
 
-with open(f"../animations/{name_of_animation}/raw.json", "w+") as file:
-    json.dump(my_animation["path raw"], file, indent=4)
+with open(f"../animations/{name_of_animation_dir}/raw.json", "w+") as file:
+    json.dump(raw_paths, file, indent=4)
+    file.close() 
 
-with open(f"../animations/{name_of_animation}/abstract_motion.json", "w+") as file:
-    json.dump(my_animation["path position independent"], file, indent=4)
+with open(f"../animations/{name_of_animation_dir}/abstract_motion.json", "w+") as file:
+    json.dump(abstract_motion_paths, file, indent=4)
+    file.close()
+    
 
 # default is to have it run at 60 frames per second
 
