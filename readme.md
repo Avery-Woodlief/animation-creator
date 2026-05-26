@@ -7,7 +7,7 @@ There are two files that the Animation Creator makes for an animation (.json) an
 What this means is that with "abstract_motion.json", you can put the animation anywhere on the screen for some object.
 How to use "abstract_motion.json":
  1) Let the object have a starting position.
-suppose the starting position is P = (x_0, y_0).
+suppose the starting position is $P = (x_0, y_0)$.
  2) After the .json file is imported, each element in the list tells where P needs to go, relative to P.
 That is, for the first step, call it S1 = (ddx, ddy), just add them together!
 To execute the animation just do P + Si for the ith step of the animation, but do not change the value of P!
