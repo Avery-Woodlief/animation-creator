@@ -1,10 +1,37 @@
 import json
 import pygame
+import os
+
+
+def init_animation():
+
+    name_of_animation = input("name your animation: ")
+    parent = "animations"
+    folder_name = f"{name_of_animation}"
+    path = os.path.join(parent, folder_name)
+
+    already_exists = True
+    while (already_exists):
+        try:
+            os.makedirs(path, exist_ok=False)
+            already_exists = False
+        except (FileExistsError) as e:
+            print(e)
+            resp = input("Are you sure you want to override (Y or N)?")
+            if (resp == "Y"):
+                os.makedirs(path, exist_ok=True)
+                already_exists = False
+            elif (resp == "N"):
+                name_of_animation = input("name your animation: ")
+                continue
+    return name_of_animation
 
 my_animation = {}
+name_of_animation = init_animation()
 
-name_of_animation = input("name your animation (careful of overrides!): ")
 
+
+        
 
 def drawing(settings, assigned_points, event, continuous):
 
@@ -122,15 +149,7 @@ for i in range(len(position_differences)):
 my_animation["path raw"] = assigned_points
 my_animation["path position independent"] = formatted # position_differences
 
-import os
 
-parent = "animations"
-
-folder_name = f"{name_of_animation}"
-
-path = os.path.join(parent, folder_name)
-
-os.makedirs(path, exist_ok=True)
 
 
 with open(f"animations/{name_of_animation}/raw.json", "w+") as file:
