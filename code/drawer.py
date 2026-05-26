@@ -36,18 +36,17 @@ class Drawer:
         self.screen = screen
         self.settings = settings
         self.raw_animations = {}
-        self.names = {}
+        self.formatted_animations = {}
+        self.names = []
         self.current_working_name = ""
 
     def create_animation(self, name):
+        self.names.append(name)
         self.raw_animations[name] = []
-        self.names[name] = False
+        self.formatted_animations[name] = []
 
     def select_animation(self, name):
-        for ____ in self.names.keys():
-            self.names[____] = False
         self.current_working_name = name
-        self.names[self.current_working_name] = True
 
     def init_animation(self, name):
         self.create_animation(name)
