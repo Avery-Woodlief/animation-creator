@@ -56,7 +56,7 @@ $$
 where each:
 
 $$
-Q_i = (x_i, y_i)
+Q_i := (x_i, y_i)
 $$
 
 `abstract_motion.json` is a list of 2-element lists:
@@ -76,5 +76,3 @@ and:
 $$
 dy_i := (y_1 - y_0) + (y_2 - y_1) + \dots + (y_i - y_{i-1}) = y_i - y_0
 $$
-
-where the $(x_i, y_i)$ are the coordinates for the point $(Q_i)$ in `raw.json`.
