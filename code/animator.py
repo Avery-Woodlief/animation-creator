@@ -3,8 +3,11 @@ import pygame
 import os
 from drawer import*
 from math_helper import *
+from event_handler import *
 
 
+# TODO: uncomment
+''' 
 def init_animation_dir():
 
     name_of_animation_dir = input("name your animation directory: ")
@@ -30,7 +33,7 @@ def init_animation_dir():
 
 my_animation = {}
 name_of_animation_dir = init_animation_dir()
-
+'''
 
 def play_animation(settings, path):
 
@@ -49,8 +52,10 @@ with open("../settings/config.json", "r") as file:
     settings = json.load(file)
 
 
+
 pygame.init()
-screen = pygame.display.set_mode((settings["display"]["screen-size"]["width"], settings["display"]["screen-size"]["height"]))
+screen_settings = settings["display"]["screen-size"]
+screen = pygame.display.set_mode((screen_settings["width"], screen_settings["height"]))
 
 clock = pygame.time.Clock()
 
@@ -59,25 +64,32 @@ running = True
 menu = {"selection" : False, "drawing":False, "play current work": False}
 
 
-animation_name = input("choose name for first animation: ")
+animation_name = ""#input("choose name for first animation: ") # TODO: uncomment
 
 draw_helper = Drawer(settings["display"], screen)
 draw_helper.init_animation(animation_name)
 
 math_helper = MathMixin(settings["animation"])
+event_handler = EventHandler(settings["general"]["key bindings"])
 
 
 FPS = settings["animation"]["FPS-normal"]
 
 while running:
 
+    
+
     for event in pygame.event.get():
         if (event.type == pygame.QUIT):
             running = False
+        if (event.type == pygame.KEYDOWN):
+            mods = event.mod
+            keys = pygame.key.get_pressed()
+            event_handler.get_pressed_keys(mods, keys)
 
+    
     keys = pygame.key.get_pressed()
     mouse = pygame.mouse.get_pressed()
-
 
     clock.tick(FPS)
 
@@ -95,8 +107,7 @@ while running:
         for k in menu.keys():
             menu[k] = False
         menu["selection"] = True
-        animation_name = input("choose name for next animation: ")
-        draw_helper.init_animation(animation_name)
+        
 
     if (menu["drawing"]):
         continuous = 1
@@ -110,6 +121,8 @@ while running:
         menu["play current work"] = False
     elif (menu["selection"]):
         screen.fill(settings["display"]["colors"]["color-black"])
+        #animation_name = input("choose name for next animation: ")
+        #draw_helper.init_animation(animation_name)
     pygame.display.flip()
 
 math_helper.make_abstract_motions(draw_helper)

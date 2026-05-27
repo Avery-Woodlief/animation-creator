@@ -40,7 +40,20 @@
     "general": {
         "frame cap": 60,
         "key bindings": {
-            "menu": {
+            "mod key references": {
+                "64": "LCTRL",
+                "1": "LSHIFT"
+            },
+            "nonmod key references": {
+                "99": "c",
+                "111": "o",
+                "108": "l",
+                "118": "v",
+                "104": "h",
+                "127": "del",
+                "122": "z"
+            },
+            "menu-commands": {
                 "49": "play current work",
                 "50": "drawing",
                 "51": "selection"

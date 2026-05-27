@@ -14,7 +14,7 @@ LEFT_MOUSE = 1
 MIDDLE_MOUSE = 2
 RIGHT_MOUSE = 3
 
-pygame.init()
+#pygame.init()
 
 settings = {}
 
@@ -32,11 +32,29 @@ settings["display"]["colors"]["color-bright-blue"] = (0, 0, 255)
 
 settings["general"] = {"frame cap":60}
 settings["general"]["key bindings"] = {}
-settings["general"]["key bindings"]["menu"] = {}
+settings["general"]["key bindings"]["mod key references"] = {}
+settings["general"]["key bindings"]["mod key references"][pygame.KMOD_LCTRL] = "LCTRL" # 64
+settings["general"]["key bindings"]["mod key references"][pygame.KMOD_LSHIFT] = "LSHIFT" # 1
 
-settings["general"]["key bindings"]["menu"][pygame.K_1] = "play current work"
-settings["general"]["key bindings"]["menu"][pygame.K_2] = "drawing"
-settings["general"]["key bindings"]["menu"][pygame.K_3] = "selection"
+settings["general"]["key bindings"]["nonmod key references"] = {}
+'''
+settings["general"]["key bindings"]["nonmod key references"][pygame.K_1] = "1"
+settings["general"]["key bindings"]["nonmod key references"][pygame.K_2] = "2"
+settings["general"]["key bindings"]["nonmod key references"][pygame.K_3] = "3"
+'''
+settings["general"]["key bindings"]["nonmod key references"][pygame.K_c] = "c"
+settings["general"]["key bindings"]["nonmod key references"][pygame.K_o] = "o"
+settings["general"]["key bindings"]["nonmod key references"][pygame.K_l] = "l"
+settings["general"]["key bindings"]["nonmod key references"][pygame.K_v] = "v"
+settings["general"]["key bindings"]["nonmod key references"][pygame.K_h] = "h"
+settings["general"]["key bindings"]["nonmod key references"][pygame.K_DELETE] = "del"
+settings["general"]["key bindings"]["nonmod key references"][pygame.K_z] = "z"
+
+settings["general"]["key bindings"]["menu-commands"] = {}
+
+settings["general"]["key bindings"]["menu-commands"][pygame.K_1] = "play current work"
+settings["general"]["key bindings"]["menu-commands"][pygame.K_2] = "drawing"
+settings["general"]["key bindings"]["menu-commands"][pygame.K_3] = "selection"
 
 
 settings["general"]["key bindings"]["drawing-commands"] = {}
