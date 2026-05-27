@@ -4,7 +4,7 @@ import json
 #f_type = "raw.json"
 f_type = "abstract_motion.json"
 
-with open(f"../animations/T/{f_type}", "r") as file:
+with open(f"../animations/T3/{f_type}", "r") as file:
     FILE = json.load(file)
 
 #print("BEFORE RE")

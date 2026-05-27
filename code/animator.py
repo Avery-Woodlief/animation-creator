@@ -66,6 +66,9 @@ draw_helper.init_animation(animation_name)
 
 math_helper = MathMixin(settings["animation"])
 
+
+FPS = settings["animation"]["FPS-normal"]
+
 while running:
 
     for event in pygame.event.get():
@@ -75,18 +78,18 @@ while running:
     keys = pygame.key.get_pressed()
     mouse = pygame.mouse.get_pressed()
 
-    #clock.tick(settings["general"]["frame cap"])
-    clock.tick(30)
+
+    clock.tick(FPS)
 
     if keys[pygame.K_1]:
         for k in menu.keys():
             menu[k] = False
-        #clock.tick(settings["general"]["frame cap"])
+
         menu["play current work"] = True
     elif keys[pygame.K_2]:
         for k in menu.keys():
             menu[k] = False
-        #clock.tick(1)
+        FPS = settings["animation"]["FPS-mouse-click"]
         menu["drawing"] = True
     elif keys[pygame.K_3]:
         for k in menu.keys():
@@ -123,8 +126,6 @@ for name in draw_helper.names:
 raw_paths = math_helper.interpolate(raw_paths, draw_helper.names)
 abstract_motion_paths = math_helper.interpolate(abstract_motion_paths, draw_helper.names)
 
-#print("BEFORE DUMPING")
-#print(abstract_motion_paths["circle"])
 
 with open(f"../animations/{name_of_animation_dir}/raw.json", "w") as file:
 
@@ -133,19 +134,7 @@ with open(f"../animations/{name_of_animation_dir}/raw.json", "w") as file:
 with open(f"../animations/{name_of_animation_dir}/abstract_motion.json", "w") as file:
 
     json.dump(abstract_motion_paths, file, indent=4)
-    
 
-#with open(f"../animations/{name_of_animation_dir}/abstract_motion.json", "r") as file:
-#    test = json.load(file)
-
-
-#print("AFTER DUMPING")
-#print(test)
-
-#for name in draw_helper.names:
-    #print(abstract_motion_paths[name])
-
-# default is to have it run at 60 frames per second
 
 
 pygame.quit()
