@@ -2,6 +2,7 @@ import json
 import pygame
 import os
 from drawer import*
+from math_helper import *
 
 
 def init_animation_dir():
@@ -60,8 +61,10 @@ menu = {"selection" : False, "drawing":False, "play current work": False}
 
 animation_name = input("choose name for first animation: ")
 
-draw_helper = Drawer(settings, screen)
+draw_helper = Drawer(settings["display"], screen)
 draw_helper.init_animation(animation_name)
+
+math_helper = MathMixin(settings["animation"])
 
 while running:
 
@@ -106,40 +109,8 @@ while running:
         screen.fill(settings["display"]["colors"]["color-black"])
     pygame.display.flip()
 
-def f(x, point, slope):
-    return point[1] + slope * (x - point[0])
+math_helper.make_abstract_motions(draw_helper)
 
-import numpy as np
-
-if (settings["animation"]["smooth"]):
-    for name in draw_helper.names:
-        pointA = []
-        pointB = []
-        new_raw_points = []
-        for i in range(1, len(draw_helper.raw_animations[name])):
-            try:
-                pointA = draw_helper.raw_animations[name][i - 1]
-                pointB = draw_helper.raw_animations[name][i]
-                new_raw_points.append(pointA)
-                slope = (pointB[1] - pointA[1])/(pointB[0] - pointA[0])
-                #y = pointA[1] + slope * (x - pointA[0])
-                step = (pointB[0] - pointA[0])/(settings["animation"]["points per segment"])
-                domain = [x for x in np.arange(pointA[0] + step, pointB[0], step)]
-                
-                for x in domain:
-                    new_raw_points.append((x, f(x, pointA, slope)))
-            except (ZeroDivisionError) as e:
-                continue
-            new_raw_points.append(pointB)
-        draw_helper.raw_animations[name] = new_raw_points
-
-for name in draw_helper.names:
-    draw_helper.formatted_animations[name] = []
-    for raw_point in draw_helper.raw_animations[name]:
-        dx = raw_point[0] - draw_helper.raw_animations[name][0][0]
-        dy = raw_point[1] - draw_helper.raw_animations[name][0][1]
-        draw_helper.formatted_animations[name].append([dx, dy])
-    #print(draw_helper.formatted_animations[name])
 
 raw_paths = {}
 abstract_motion_paths = {}
@@ -149,6 +120,8 @@ for name in draw_helper.names:
     raw_paths[name] = draw_helper.raw_animations[name]
     abstract_motion_paths[name] = draw_helper.formatted_animations[name]
 
+raw_paths = math_helper.interpolate(raw_paths, draw_helper.names)
+abstract_motion_paths = math_helper.interpolate(abstract_motion_paths, draw_helper.names)
 
 #print("BEFORE DUMPING")
 #print(abstract_motion_paths["circle"])
