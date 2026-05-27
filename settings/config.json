@@ -1,8 +1,8 @@
 {
     "display": {
         "screen-size": {
-            "width": 500,
-            "height": 500
+            "width": 1000,
+            "height": 700
         },
         "colors": {
             "color-white": [
@@ -38,13 +38,33 @@
         }
     },
     "general": {
-        "frame cap": 60
+        "frame cap": 60,
+        "key bindings": {
+            "menu": {
+                "49": "play current work",
+                "50": "drawing",
+                "51": "selection"
+            },
+            "drawing-commands": {
+                "99": "close shape",
+                "111": "toggle overlay",
+                "118": "toggle vertical line",
+                "104": "toggle horizontal line",
+                "122": "redo last undo"
+            },
+            "animation-commands": {
+                "114": "reverse animation direction",
+                "127": "delete node"
+            }
+        }
     },
     "animation": {
-        "FPS": 60,
+        "FPS-normal": 60,
+        "FPS-mouse-click": 20,
         "frames count": 10,
+        "FPS-mouse-drag": 60,
         "lifetime": 0.16666666666666666,
-        "smooth": true,
+        "smooth": false,
         "points per segment": 5
     }
 }
