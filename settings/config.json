@@ -50,11 +50,12 @@
                 "111": "toggle overlay",
                 "118": "toggle vertical line",
                 "104": "toggle horizontal line",
-                "122": "redo last undo"
+                "122": "redo last undo",
+                "127": "delete selected node"
             },
             "animation-commands": {
                 "114": "reverse animation direction",
-                "127": "delete node"
+                "99": "customize animation direction"
             }
         }
     },
