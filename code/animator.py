@@ -7,7 +7,7 @@ from event_handler import *
 from file_ops import *
 
 file_ops = FileHandler()
-file_ops.init_animation_dir()
+#file_ops.init_animation_dir()
 
 def play_animation(settings, path):
 
@@ -40,6 +40,7 @@ draw_helper.init_animation(animation_name)
 
 math_helper = MathMixin(settings["animation"])
 event_handler = EventHandler(settings["general"]["key bindings"])
+#, settings["animation"]
 
 
 FPS = settings["animation"]["FPS-normal"]
@@ -71,7 +72,8 @@ abstract_motion_paths = math_helper.interpolate(abstract_motion_paths, draw_help
 
 
 
-file_ops.dump_data(raw_paths, abstract_motion_paths)
+if (len(file_ops.name_of_animation_dir) > 0):
+    file_ops.dump_data(raw_paths, abstract_motion_paths)
 
 
 

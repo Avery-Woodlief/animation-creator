@@ -1,7 +1,8 @@
 import pygame
 #from commander import *
 
-class EventHandler:
+class EventHandler: #TODO: take in the Drawer, *AnimationPlayer classes
+    #TODO: *
 
     def __init__(self, settings):
         self.drawing_commands = settings["drawing-commands"]
@@ -22,12 +23,16 @@ class EventHandler:
     def window_1(self):
         print("playing current working animation")
         #play_animation(settings, draw_helper.raw_animations[draw_helper.current_working_name])
+        #TODO: call for the AnimationPlayer class
     def window_2(self):
         print("in the drawing menu")
+        #TODO: call for the Drawer class
     def window_3(self):
         print("in the selection menu")
+        #TODO: ???
     def window_start(self):
         print("in start menu")
+        #TODO: ???
 
 
     def check_menu_state(self):
@@ -61,7 +66,7 @@ class EventHandler:
             if bit in menu_key_pressed:
                 command += self.menu_options[bit] + " "
         self.command = command.rstrip()
-        print(self.command)
+        #print(self.command)
         
         
     def get_event(self, event):
