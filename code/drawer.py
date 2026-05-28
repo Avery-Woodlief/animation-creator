@@ -9,15 +9,19 @@ import pygame
 
 class Drawer:
 
-    def __init__(self, settings, screen):
+    def __init__(self, settings, screen, window_decorator):
         self.screen = screen
         self.display_settings = settings["display"]
-        #self.mouse_settings = settings["mouse-settings"]
+        self.fonts = self.display_settings["fonts"]
+        self.font_sizes = self.display_settings["font-sizes"]
+        self.color_settings = self.display_settings["colors"]
         self.draw_settings = settings["drawing"]
+
         self.raw_animations = {}
         self.formatted_animations = {}
         self.names = []
         self.current_working_name = ""
+        self.window_decorator = window_decorator
         
         # TODO: allow more shape options
 
@@ -33,18 +37,23 @@ class Drawer:
         self.create_animation(name)
         self.select_animation(name)
 
+    def draw_already_existing_points(self):
+        for point in self.raw_animations[self.current_working_name]:
+            pygame.draw.circle(self.screen, (0, 0, 255), point, 10)
+
     def drawing(self, event):
         if (self.draw_settings["continuous - static"] in [False, True]):
             continuous = self.draw_settings["continuous - static"]
         else:
             raise ValueError("continuous in config not set properly")
         
-        self.screen.fill(self.display_settings["colors"]["color-white"])
+        
+        #self.screen.fill(self.display_settings["colors"]["color-white"])
+        self.window_decorator.put_text_on_window()
         if (self.draw_settings["connect points - static"]):
             if (len(self.raw_animations[self.current_working_name]) >= 2):
                 pygame.draw.lines(self.screen, (0, 0, 255), False, self.raw_animations[self.current_working_name], 10)
-        for point in self.raw_animations[self.current_working_name]:
-            pygame.draw.circle(self.screen, (0, 0, 255), point, 10)
+        
             
             
         try:

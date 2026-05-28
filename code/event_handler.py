@@ -2,9 +2,11 @@ import pygame
 
 class EventHandler:
 
-    def __init__(self, settings, drawer, animation_player):
+    def __init__(self, settings, drawer, animation_player, window_decorator):
         self.drawer = drawer
         self.animation_player = animation_player
+        self.window_decorator = window_decorator
+        self.screen = self.animation_player.screen
         # ------------------ Move to Drawer class?
         self.drawing_commands = settings["drawing-commands"]
         self.animation_commands = settings["animation-commands"]
@@ -23,8 +25,13 @@ class EventHandler:
         self.drag_has_begun = False
         self.drag_has_ended = False
 
+    
+
     def window_player(self):
         #print("playing current working animation")
+        #self.animation_player.decorate_window()
+        self.window_decorator.update_window_text("Animation Player")
+        self.window_decorator.put_text_on_window()
         for e in self.events:
             #print(e)
             if (e.type == pygame.TEXTINPUT):
@@ -34,7 +41,10 @@ class EventHandler:
                     self.events.remove(e)
     def window_drawer(self):
         #print("in the drawing menu")
-        
+        #self.drawer.decorate_window()
+        self.window_decorator.update_window_text("Drawer")
+        self.window_decorator.put_text_on_window()
+        self.drawer.draw_already_existing_points()
         for e in self.events:
             if (not self.drag_has_begun): # condition for next dragging iteration
                 self.drag_has_ended = False
@@ -60,12 +70,15 @@ class EventHandler:
 
     def check_menu_state(self):
         if (self.command in self.menu_options_names):
+            if (self.command != self.current_menu_state):
+                self.screen.fill((255, 255, 255))
             self.current_menu_state = self.command
             #self.do_menu()
             self.command = ""
 
     def do_menu(self):
         #self.window = None
+        
         if (self.current_menu_state == "play current work"):
             self.window = self.window_player()
         if (self.current_menu_state == "drawing"):
