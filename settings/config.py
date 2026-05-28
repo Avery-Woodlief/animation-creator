@@ -76,7 +76,7 @@ settings["general"]["key bindings"]["animation-commands"][pygame.K_LCTRL and pyg
 settings["animation"] = {"FPS-normal":60, "FPS-mouse-click":20, "frames count":10}
 settings["animation"]["FPS-mouse-drag"] = 60
 settings["animation"]["lifetime"] = settings["animation"]["frames count"]/settings["animation"]["FPS-normal"] # lifetime measured in seconds
-settings["animation"]["smooth"] = False # if set to True, program will try to make the animation less 'blocky' in movement
+settings["animation"]["smooth"] = False # if set to True, program will try to interpolate extra points
 settings["animation"]["points per segment"] = 5 # this is effectively how detailed each line will be for smoothness
 
 
