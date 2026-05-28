@@ -25,7 +25,6 @@ def play_animation(settings, path):
 settings = file_ops.get_file_settings()
 
 
-
 pygame.init()
 screen_settings = settings["display"]["screen-size"]
 screen = pygame.display.set_mode((screen_settings["width"], screen_settings["height"]))
@@ -35,11 +34,11 @@ clock = pygame.time.Clock()
 
 animation_name = ""#input("choose name for first animation: ") # TODO: uncomment
 
-draw_helper = Drawer(settings["display"], screen)
+draw_helper = Drawer(settings, screen)
 draw_helper.init_animation(animation_name)
 
 math_helper = MathMixin(settings["animation"])
-event_handler = EventHandler(settings["general"]["key bindings"])
+event_handler = EventHandler(settings["general"]["key bindings"], draw_helper)
 #, settings["animation"]
 
 
@@ -50,7 +49,7 @@ while event_handler.running:
     keys = pygame.key.get_pressed()
     mouse = pygame.mouse.get_pressed()
 
-    clock.tick(FPS)
+    clock.tick(120)
 
     event_handler.get_event(pygame.event.get())
 
