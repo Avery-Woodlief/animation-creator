@@ -1,15 +1,25 @@
 import pygame
 
 
+'''
+#x, y = pygame.mouse.get_pos()
+#pygame.draw.rect(screen, (255, 0, 0), (x, y, 50, 50))
+'''
+
+
 class Drawer:
 
     def __init__(self, settings, screen):
         self.screen = screen
-        self.settings = settings
+        self.display_settings = settings["display"]
+        #self.mouse_settings = settings["mouse-settings"]
+        self.draw_settings = settings["drawing"]
         self.raw_animations = {}
         self.formatted_animations = {}
         self.names = []
         self.current_working_name = ""
+        
+        # TODO: allow more shape options
 
     def create_animation(self, name):
         self.names.append(name)
@@ -23,33 +33,25 @@ class Drawer:
         self.create_animation(name)
         self.select_animation(name)
 
-    def drawing(self, event, continuous=0):
-        if (continuous):
-            mouse = pygame.mouse.get_pressed()
-        self.screen.fill(self.settings["colors"]["color-white"])
-        if (len(self.raw_animations[self.current_working_name]) >= 2):
-            pygame.draw.lines(self.screen, (0, 0, 255), False, self.raw_animations[self.current_working_name], 10)
-        for point in self.raw_animations[self.current_working_name]:#assigned_points:
+    def drawing(self, event):
+        if (self.draw_settings["continuous"] in [False, True]):
+            continuous = self.draw_settings["continuous"]
+        else:
+            raise ValueError("continuous in config not set properly")
+        
+        self.screen.fill(self.display_settings["colors"]["color-white"])
+        if (self.draw_settings["connect points"]):
+            if (len(self.raw_animations[self.current_working_name]) >= 2):
+                pygame.draw.lines(self.screen, (0, 0, 255), False, self.raw_animations[self.current_working_name], 10)
+        for point in self.raw_animations[self.current_working_name]:
             pygame.draw.circle(self.screen, (0, 0, 255), point, 10)
             
             
-            #x, y = point
-            #pygame.draw.rect(screen, (255, 0, 0), (x, y, 50, 50))
-        if (continuous):
-            if (mouse[0]):
-                #x, y = pygame.mouse.get_pos()
-                #pygame.draw.rect(screen, (255, 0, 0), (x, y, 50, 50))
-                pygame.draw.circle(self.screen, (255, 0, 0), pygame.mouse.get_pos(), 2)
-                #assigned_points.append(pygame.mouse.get_pos())
-                self.raw_animations[self.current_working_name].append(pygame.mouse.get_pos())
-        elif (not continuous):
-            if (event.type == pygame.MOUSEBUTTONDOWN):
-                if (event.button == 1):  
-                    #x, y = pygame.mouse.get_pos()
-                    #pygame.draw.rect(screen, (255, 0, 0), (x, y, 50, 50))
-                    pygame.draw.circle(self.screen, (255, 0, 0), pygame.mouse.get_pos(), 2)
-                    #assigned_points.append(pygame.mouse.get_pos())
-                    self.raw_animations[self.current_working_name].append(pygame.mouse.get_pos())
+        try:
+            pygame.draw.circle(self.screen, (255, 0, 0), event.pos, 2)
+            self.raw_animations[self.current_working_name].append(event.pos)
+        except (AttributeError):
+            return # grabbed bad event
                     
         if (not continuous):
             # removes duplicate positions but preserves order
