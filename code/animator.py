@@ -2,6 +2,7 @@ import json
 import pygame
 import os
 from drawer import *
+from animation_player import *
 from math_helper import *
 from event_handler import *
 from file_ops import *
@@ -9,17 +10,7 @@ from file_ops import *
 file_ops = FileHandler()
 #file_ops.init_animation_dir()
 
-def play_animation(settings, path):
 
-    R = 2
-
-    for point in path:
-        
-        clock.tick(settings["animation"]["FPS"])
-
-        screen.fill(tuple(settings["display"]["colors"]["color-white"]))
-        pygame.draw.circle(screen, (0, 0, 0), point, R)
-        pygame.display.flip()
 
 
 settings = file_ops.get_file_settings()
@@ -37,8 +28,10 @@ animation_name = ""#input("choose name for first animation: ") # TODO: uncomment
 draw_helper = Drawer(settings, screen)
 draw_helper.init_animation(animation_name)
 
+animation_player = AnimationPlayer(settings, screen)
+
 math_helper = MathMixin(settings["animation"])
-event_handler = EventHandler(settings["general"]["key bindings"], draw_helper)
+event_handler = EventHandler(settings["general"]["key bindings"], draw_helper, animation_player)
 #, settings["animation"]
 
 

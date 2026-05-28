@@ -1,10 +1,10 @@
 import pygame
 
-class EventHandler: #TODO: take in the Drawer, *AnimationPlayer classes
-    #TODO: *
+class EventHandler:
 
-    def __init__(self, settings, drawer):
+    def __init__(self, settings, drawer, animation_player):
         self.drawer = drawer
+        self.animation_player = animation_player
         # ------------------ Move to Drawer class?
         self.drawing_commands = settings["drawing-commands"]
         self.animation_commands = settings["animation-commands"]
@@ -23,11 +23,16 @@ class EventHandler: #TODO: take in the Drawer, *AnimationPlayer classes
         self.drag_has_begun = False
         self.drag_has_ended = False
 
-    def window_1(self):
-        print("playing current working animation")
-        #play_animation(settings, draw_helper.raw_animations[draw_helper.current_working_name])
-        #TODO: call for the AnimationPlayer class
-    def window_2(self):
+    def window_player(self):
+        #print("playing current working animation")
+        for e in self.events:
+            #print(e)
+            if (e.type == pygame.TEXTINPUT):
+                if (e.text == ' '):
+                    #print(e)
+                    self.animation_player.play_animation(self.drawer.raw_animations[self.drawer.current_working_name])
+                    self.events.remove(e)
+    def window_drawer(self):
         #print("in the drawing menu")
         
         for e in self.events:
@@ -46,7 +51,7 @@ class EventHandler: #TODO: take in the Drawer, *AnimationPlayer classes
         #print(f"\\self.drag_has_begun: {self.drag_has_begun}\nself.drag_has_ended: {self.drag_has_ended}\\")
     def window_3(self):
         print("in the selection menu")
-        #TODO: ???
+        #TODO: used for selecting what animation to load in
     def window_start(self):
         print("in start menu")
         self.drawer.screen.fill(self.drawer.display_settings["colors"]["color-white"])
@@ -62,9 +67,9 @@ class EventHandler: #TODO: take in the Drawer, *AnimationPlayer classes
     def do_menu(self):
         #self.window = None
         if (self.current_menu_state == "play current work"):
-            self.window = self.window_1()
+            self.window = self.window_player()
         if (self.current_menu_state == "drawing"):
-            self.window = self.window_2()
+            self.window = self.window_drawer()
         if (self.current_menu_state == "selection"):
             self.window = self.window_3()
         if (self.window):
