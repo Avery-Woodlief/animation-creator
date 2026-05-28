@@ -80,5 +80,9 @@
         "lifetime": 0.16666666666666666,
         "smooth": false,
         "points per segment": 5
+    },
+    "drawing": {
+        "connect points": false,
+        "continuous": true
     }
 }
