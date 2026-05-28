@@ -34,11 +34,25 @@
                 0,
                 0,
                 255
-            ]
+            ],
+            "color-custom-rgb": "",
+            "color-custom-rgba": ""
+        },
+        "font-sizes": {
+            "small": 10,
+            "medium": 20,
+            "large": 30,
+            "x-large": 40,
+            "custom": ""
+        },
+        "fonts": {
+            "arial": "",
+            "custom": ""
         }
     },
     "general": {
         "frame cap": 60,
+        "frame cap custom": "",
         "key bindings": {
             "mod key references": {
                 "64": "LCTRL",
@@ -79,11 +93,15 @@
         "FPS-animation-player": 120,
         "FPS-mouse-drag": 60,
         "lifetime": 0.16666666666666666,
-        "smooth": false,
-        "points per segment": 5
+        "smooth": "",
+        "smooth - static": false,
+        "points per segment": "",
+        "points per segment - static": 5
     },
     "drawing": {
-        "connect points": false,
-        "continuous": true
+        "connect points": "",
+        "continuous": "",
+        "connect points - static": false,
+        "continuous - static": false
     }
 }

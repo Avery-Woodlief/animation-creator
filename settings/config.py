@@ -29,8 +29,20 @@ settings["display"]["colors"]["color-grey"] = (50, 50, 50)
 settings["display"]["colors"]["color-bright-red"] = (255, 0, 0)
 settings["display"]["colors"]["color-bright-green"] = (0, 255, 0)
 settings["display"]["colors"]["color-bright-blue"] = (0, 0, 255)
+settings["display"]["colors"]["color-custom-rgb"] = ""
+settings["display"]["colors"]["color-custom-rgba"] = ""
+
+
+settings["display"]["font-sizes"] = {"small":10, "medium":20, "large":30, "x-large":40}
+settings["display"]["font-sizes"]["custom"] = ""
+settings["display"]["fonts"] = {}
+settings["display"]["fonts"]["arial"] = ""
+settings["display"]["fonts"]["custom"] = ""
+
 
 settings["general"] = {"frame cap":60}
+settings["general"]["frame cap custom"] = "" 
+
 settings["general"]["key bindings"] = {}
 settings["general"]["key bindings"]["mod key references"] = {}
 settings["general"]["key bindings"]["mod key references"][pygame.KMOD_LCTRL] = "LCTRL" # 64
@@ -46,7 +58,6 @@ settings["general"]["key bindings"]["nonmod key references"][pygame.K_DELETE] = 
 settings["general"]["key bindings"]["nonmod key references"][pygame.K_z] = "z"
 
 settings["general"]["key bindings"]["menu-commands"] = {}
-
 settings["general"]["key bindings"]["menu-commands"][pygame.K_1] = "play current work"
 settings["general"]["key bindings"]["menu-commands"][pygame.K_2] = "drawing"
 settings["general"]["key bindings"]["menu-commands"][pygame.K_3] = "selection"
@@ -72,12 +83,21 @@ settings["animation"] = {"FPS-normal":60, "FPS-mouse-click":20, "frames count":1
 settings["animation"]["FPS-animation-player"] = 120
 settings["animation"]["FPS-mouse-drag"] = 60
 settings["animation"]["lifetime"] = settings["animation"]["frames count"]/settings["animation"]["FPS-normal"] # lifetime measured in seconds
-settings["animation"]["smooth"] = False # if set to True, program will try to interpolate extra points
-settings["animation"]["points per segment"] = 5 # this is effectively how detailed each line will be for smoothness
+
+# TODO
+# if set to True, program will try to interpolate extra points
+settings["animation"]["smooth"] = ""
+settings["animation"]["smooth - static"] = False
+# this is effectively how detailed each line will be for smoothness 
+settings["animation"]["points per segment"] = ""
+settings["animation"]["points per segment - static"] = 5
 #settings["animation"]["continuous"] = False
 
-settings["drawing"] = {"connect points":False, "continuous":True}
 
+# TODO
+settings["drawing"] = {"connect points":"", "continuous":""}
+settings["drawing"]["connect points - static"] = False
+settings["drawing"]["continuous - static"] = False
 
 #settings["mouse-settings"]["sensitivity"] = 1
 

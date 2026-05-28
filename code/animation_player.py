@@ -4,6 +4,8 @@ class AnimationPlayer:
 
     def __init__(self, settings, screen):
         self.animation_settings = settings["animation"]
+        self.fonts = settings["display"]["fonts"]
+        self.font_sizes = settings["display"]["font-sizes"]
         self.color_settings = settings["display"]["colors"]
         self.screen = screen
         

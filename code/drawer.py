@@ -34,13 +34,13 @@ class Drawer:
         self.select_animation(name)
 
     def drawing(self, event):
-        if (self.draw_settings["continuous"] in [False, True]):
-            continuous = self.draw_settings["continuous"]
+        if (self.draw_settings["continuous - static"] in [False, True]):
+            continuous = self.draw_settings["continuous - static"]
         else:
             raise ValueError("continuous in config not set properly")
         
         self.screen.fill(self.display_settings["colors"]["color-white"])
-        if (self.draw_settings["connect points"]):
+        if (self.draw_settings["connect points - static"]):
             if (len(self.raw_animations[self.current_working_name]) >= 2):
                 pygame.draw.lines(self.screen, (0, 0, 255), False, self.raw_animations[self.current_working_name], 10)
         for point in self.raw_animations[self.current_working_name]:

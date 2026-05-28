@@ -7,6 +7,20 @@ from math_helper import *
 from event_handler import *
 from file_ops import *
 
+
+def init_dynamic_settings(settings):
+
+    settings["animation"]["points per segment"] = lambda pps_num : pps_num
+    settings["animation"]["smooth"] = lambda smoothness_bool : smoothness_bool
+    settings["drawing"]["connect points"] = lambda connect_points_bool : connect_points_bool
+    settings["drawing"]["continuous"] = lambda continuous_bool:continuous_bool
+    settings["display"]["fonts"]["arial"] = lambda x: pygame.font.SysFont('arial', x)
+    settings["display"]["fonts"]["custom"] = lambda name, size : pygame.font.SysFont(name, size)
+    settings["display"]["font-sizes"]["custom"] = lambda x: x
+    settings["display"]["colors"]["color-custom-rgb"] = lambda r,g,b : (r, g, b)
+    settings["display"]["colors"]["color-custom-rgba"] = lambda r,g,b,a : (r, g, b,a)
+    settings["general"]["frame cap custom"] = lambda x : x
+
 file_ops = FileHandler()
 #file_ops.init_animation_dir()
 
@@ -14,6 +28,8 @@ file_ops = FileHandler()
 
 
 settings = file_ops.get_file_settings()
+
+init_dynamic_settings(settings)
 
 
 pygame.init()
@@ -36,6 +52,17 @@ event_handler = EventHandler(settings["general"]["key bindings"], draw_helper, a
 
 
 FPS = settings["animation"]["FPS-normal"]
+
+
+
+text_surface = settings["display"]["fonts"]["arial"](settings["display"]["font-sizes"]["x-large"]).render(
+        "Start Window!",
+        True,              # antialiasing
+        settings["display"]["colors"]["color-custom-rgb"](20, 40, 255)    # color
+    )
+
+# Draw text
+screen.blit(text_surface, (screen_settings["width"]//3, screen_settings["height"]//2))
 
 while event_handler.running:
     
