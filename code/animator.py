@@ -1,39 +1,13 @@
 import json
 import pygame
 import os
-from drawer import*
+from drawer import *
 from math_helper import *
 from event_handler import *
+from file_ops import *
 
-
-# TODO: uncomment
-''' 
-def init_animation_dir():
-
-    name_of_animation_dir = input("name your animation directory: ")
-    parent = "../animations"
-    folder_name = f"{name_of_animation_dir}"
-    path = os.path.join(parent, folder_name)
-
-    already_exists = True
-    while (already_exists):
-        try:
-            os.makedirs(path, exist_ok=False)
-            already_exists = False
-        except (FileExistsError) as e:
-            print(e)
-            resp = input("Are you sure you want to override (Y or N)?")
-            if (resp == "Y"):
-                os.makedirs(path, exist_ok=True)
-                already_exists = False
-            elif (resp == "N"):
-                name_of_animation_dir = input("name your animation directory: ")
-                continue
-    return name_of_animation_dir
-
-my_animation = {}
-name_of_animation_dir = init_animation_dir()
-'''
+file_ops = FileHandler()
+file_ops.init_animation_dir()
 
 def play_animation(settings, path):
 
@@ -48,8 +22,7 @@ def play_animation(settings, path):
         pygame.display.flip()
 
 
-with open("../settings/config.json", "r") as file:
-    settings = json.load(file)
+settings = file_ops.get_file_settings()
 
 
 
@@ -58,8 +31,6 @@ screen_settings = settings["display"]["screen-size"]
 screen = pygame.display.set_mode((screen_settings["width"], screen_settings["height"]))
 
 clock = pygame.time.Clock()
-
-#menu = {"selection" : False, "drawing":False, "play current work": False}
 
 
 animation_name = ""#input("choose name for first animation: ") # TODO: uncomment
@@ -82,8 +53,6 @@ while event_handler.running:
 
     event_handler.get_event(pygame.event.get())
 
-    
-
     pygame.display.flip()
 
 math_helper.make_abstract_motions(draw_helper)
@@ -101,13 +70,10 @@ raw_paths = math_helper.interpolate(raw_paths, draw_helper.names)
 abstract_motion_paths = math_helper.interpolate(abstract_motion_paths, draw_helper.names)
 
 
-with open(f"../animations/{name_of_animation_dir}/raw.json", "w") as file:
 
-    json.dump(raw_paths, file, indent=4)
+file_ops.dump_data(raw_paths, abstract_motion_paths)
 
-with open(f"../animations/{name_of_animation_dir}/abstract_motion.json", "w") as file:
 
-    json.dump(abstract_motion_paths, file, indent=4)
 
 
 
