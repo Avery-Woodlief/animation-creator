@@ -37,11 +37,6 @@ settings["general"]["key bindings"]["mod key references"][pygame.KMOD_LCTRL] = "
 settings["general"]["key bindings"]["mod key references"][pygame.KMOD_LSHIFT] = "LSHIFT" # 1
 
 settings["general"]["key bindings"]["nonmod key references"] = {}
-'''
-settings["general"]["key bindings"]["nonmod key references"][pygame.K_1] = "1"
-settings["general"]["key bindings"]["nonmod key references"][pygame.K_2] = "2"
-settings["general"]["key bindings"]["nonmod key references"][pygame.K_3] = "3"
-'''
 settings["general"]["key bindings"]["nonmod key references"][pygame.K_c] = "c"
 settings["general"]["key bindings"]["nonmod key references"][pygame.K_o] = "o"
 settings["general"]["key bindings"]["nonmod key references"][pygame.K_l] = "l"
@@ -74,6 +69,7 @@ settings["general"]["key bindings"]["animation-commands"][pygame.K_LCTRL and pyg
 
 
 settings["animation"] = {"FPS-normal":60, "FPS-mouse-click":20, "frames count":10}
+settings["animation"]["FPS-animation-player"] = 120
 settings["animation"]["FPS-mouse-drag"] = 60
 settings["animation"]["lifetime"] = settings["animation"]["frames count"]/settings["animation"]["FPS-normal"] # lifetime measured in seconds
 settings["animation"]["smooth"] = False # if set to True, program will try to interpolate extra points

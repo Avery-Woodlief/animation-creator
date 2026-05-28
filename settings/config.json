@@ -76,6 +76,7 @@
         "FPS-normal": 60,
         "FPS-mouse-click": 20,
         "frames count": 10,
+        "FPS-animation-player": 120,
         "FPS-mouse-drag": 60,
         "lifetime": 0.16666666666666666,
         "smooth": false,
