@@ -59,9 +59,7 @@ screen = pygame.display.set_mode((screen_settings["width"], screen_settings["hei
 
 clock = pygame.time.Clock()
 
-running = True
-
-menu = {"selection" : False, "drawing":False, "play current work": False}
+#menu = {"selection" : False, "drawing":False, "play current work": False}
 
 
 animation_name = ""#input("choose name for first animation: ") # TODO: uncomment
@@ -75,54 +73,17 @@ event_handler = EventHandler(settings["general"]["key bindings"])
 
 FPS = settings["animation"]["FPS-normal"]
 
-while running:
-
-    
-
-    for event in pygame.event.get():
-        if (event.type == pygame.QUIT):
-            running = False
-        if (event.type == pygame.KEYDOWN):
-            mods = event.mod
-            keys = pygame.key.get_pressed()
-            event_handler.get_pressed_keys(mods, keys)
-
+while event_handler.running:
     
     keys = pygame.key.get_pressed()
     mouse = pygame.mouse.get_pressed()
 
     clock.tick(FPS)
 
-    if keys[pygame.K_1]:
-        for k in menu.keys():
-            menu[k] = False
+    event_handler.get_event(pygame.event.get())
 
-        menu["play current work"] = True
-    elif keys[pygame.K_2]:
-        for k in menu.keys():
-            menu[k] = False
-        FPS = settings["animation"]["FPS-mouse-click"]
-        menu["drawing"] = True
-    elif keys[pygame.K_3]:
-        for k in menu.keys():
-            menu[k] = False
-        menu["selection"] = True
-        
+    
 
-    if (menu["drawing"]):
-        continuous = 1
-        draw_helper.drawing(event, continuous)
-        #if (not continuous):
-            #draw_helper.raw_animations[draw_helper.current_working_name] = list(dict.fromkeys(draw_helper.raw_animations[draw_helper.current_working_name]))
-    elif (menu["play current work"]):
-        play_animation(settings, draw_helper.raw_animations[draw_helper.current_working_name])
-        #print(pygame.draw.lines(screen, (0, 0, 255), False, draw_helper.raw_animations[draw_helper.current_working_name], 10))
-
-        menu["play current work"] = False
-    elif (menu["selection"]):
-        screen.fill(settings["display"]["colors"]["color-black"])
-        #animation_name = input("choose name for next animation: ")
-        #draw_helper.init_animation(animation_name)
     pygame.display.flip()
 
 math_helper.make_abstract_motions(draw_helper)
