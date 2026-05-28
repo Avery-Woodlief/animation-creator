@@ -21,6 +21,7 @@ class EventHandler:
 
     def window_1(self):
         print("playing current working animation")
+        #play_animation(settings, draw_helper.raw_animations[draw_helper.current_working_name])
     def window_2(self):
         print("in the drawing menu")
     def window_3(self):
