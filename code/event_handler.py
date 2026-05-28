@@ -89,9 +89,9 @@ class EventHandler:
             self.window()
 
     def get_pressed_keys(self, mods, keys):
-        mods_pressed = [bit for bit, name in self.mod_keys.items() if mods & int(bit)]
-        keys_pressed = [bit for bit, name in self.nonmod_keys.items() if keys[int(bit)]]
-        menu_key_pressed = [bit for bit, name in self.menu_options.items() if keys[int(bit)]]
+        mods_pressed = [bit for bit, name in self.mod_keys.items() if mods & int(bit)] # LALT, LCTRL, LSHIFT, RALT, RCTRL, RSHIFT, ...
+        keys_pressed = [bit for bit, name in self.nonmod_keys.items() if keys[int(bit)]] # l, o, p, z, ...
+        menu_key_pressed = [bit for bit, name in self.menu_options.items() if keys[int(bit)]] # 1, 2, 3
         self.pressed = mods_pressed + keys_pressed + menu_key_pressed
         command = ""
         for bit in self.pressed:
@@ -102,7 +102,11 @@ class EventHandler:
             if bit in menu_key_pressed:
                 command += self.menu_options[bit] + " "
         self.command = command.rstrip()
-        #print(self.command)
+        print(self.command)
+        try:
+            print(self.drawing_commands[self.command])
+        except:
+            print()
         
         
     def get_event(self, event):

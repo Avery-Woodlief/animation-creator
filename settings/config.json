@@ -56,16 +56,41 @@
         "key bindings": {
             "mod key references": {
                 "64": "LCTRL",
-                "1": "LSHIFT"
+                "1": "LSHIFT",
+                "256": "LALT",
+                "128": "RCTRL",
+                "2": "RSHIFT",
+                "512": "RALT"
             },
             "nonmod key references": {
+                "97": "a",
+                "98": "b",
                 "99": "c",
-                "111": "o",
-                "108": "l",
-                "118": "v",
+                "100": "d",
+                "101": "e",
+                "102": "f",
+                "103": "g",
                 "104": "h",
-                "127": "del",
-                "122": "z"
+                "105": "i",
+                "106": "j",
+                "107": "k",
+                "108": "l",
+                "109": "m",
+                "110": "n",
+                "111": "o",
+                "112": "p",
+                "113": "q",
+                "114": "r",
+                "115": "s",
+                "116": "t",
+                "117": "u",
+                "118": "v",
+                "119": "w",
+                "120": "x",
+                "121": "y",
+                "122": "z",
+                "127": "DEL",
+                "27": "ESC"
             },
             "menu-commands": {
                 "49": "play current work",
@@ -73,16 +98,18 @@
                 "51": "selection"
             },
             "drawing-commands": {
-                "99": "close shape",
-                "111": "toggle overlay",
-                "118": "toggle vertical line",
-                "104": "toggle horizontal line",
-                "122": "redo last undo",
-                "127": "delete selected node"
+                "LSHIFT c": "close shape",
+                "LCTRL o": "toggle overlay",
+                "LSHIFT l v": "toggle vertical line",
+                "LSHIFT l h": "toggle horizontal line",
+                "LCTRL z": "undo last node",
+                "LCTRL LSHIFT z": "redo last undo",
+                "LCTRL DEL": "delete selected node",
+                "ESC": "make disjoint"
             },
             "animation-commands": {
-                "114": "reverse animation direction",
-                "99": "customize animation direction"
+                "LCTRL LSHIFT r": "reverse animation direction",
+                "LCTRL LSHIFT c": "customize animation direction"
             }
         }
     },

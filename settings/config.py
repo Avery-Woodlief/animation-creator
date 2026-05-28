@@ -45,17 +45,25 @@ settings["general"]["frame cap custom"] = ""
 
 settings["general"]["key bindings"] = {}
 settings["general"]["key bindings"]["mod key references"] = {}
-settings["general"]["key bindings"]["mod key references"][pygame.KMOD_LCTRL] = "LCTRL" # 64
-settings["general"]["key bindings"]["mod key references"][pygame.KMOD_LSHIFT] = "LSHIFT" # 1
+settings["general"]["key bindings"]["mod key references"][pygame.KMOD_LCTRL] = "LCTRL"
+settings["general"]["key bindings"]["mod key references"][pygame.KMOD_LSHIFT] = "LSHIFT"
+settings["general"]["key bindings"]["mod key references"][pygame.KMOD_LALT] = "LALT"
+settings["general"]["key bindings"]["mod key references"][pygame.KMOD_RCTRL] = "RCTRL" 
+settings["general"]["key bindings"]["mod key references"][pygame.KMOD_RSHIFT] = "RSHIFT"
+settings["general"]["key bindings"]["mod key references"][pygame.KMOD_RALT] = "RALT"
 
-settings["general"]["key bindings"]["nonmod key references"] = {}
+
+settings["general"]["key bindings"]["nonmod key references"] = {ord('a')+i:chr(ord('a')+i) for i in range(26)}
+'''
 settings["general"]["key bindings"]["nonmod key references"][pygame.K_c] = "c"
 settings["general"]["key bindings"]["nonmod key references"][pygame.K_o] = "o"
 settings["general"]["key bindings"]["nonmod key references"][pygame.K_l] = "l"
 settings["general"]["key bindings"]["nonmod key references"][pygame.K_v] = "v"
 settings["general"]["key bindings"]["nonmod key references"][pygame.K_h] = "h"
-settings["general"]["key bindings"]["nonmod key references"][pygame.K_DELETE] = "del"
 settings["general"]["key bindings"]["nonmod key references"][pygame.K_z] = "z"
+'''
+settings["general"]["key bindings"]["nonmod key references"][pygame.K_DELETE] = "DEL"
+settings["general"]["key bindings"]["nonmod key references"][pygame.K_ESCAPE] = "ESC"
 
 settings["general"]["key bindings"]["menu-commands"] = {}
 settings["general"]["key bindings"]["menu-commands"][pygame.K_1] = "play current work"
@@ -64,17 +72,23 @@ settings["general"]["key bindings"]["menu-commands"][pygame.K_3] = "selection"
 
 
 settings["general"]["key bindings"]["drawing-commands"] = {}
-settings["general"]["key bindings"]["drawing-commands"][pygame.K_LSHIFT and pygame.K_c] = "close shape"
-settings["general"]["key bindings"]["drawing-commands"][pygame.K_LCTRL and pygame.K_o] = "toggle overlay"
-settings["general"]["key bindings"]["drawing-commands"][pygame.K_LSHIFT and pygame.K_l and pygame.K_v] = "toggle vertical line"
-settings["general"]["key bindings"]["drawing-commands"][pygame.K_LSHIFT and pygame.K_l and pygame.K_h] = "toggle horizontal line"
-settings["general"]["key bindings"]["drawing-commands"][pygame.K_LCTRL and pygame.K_z] = "undo last node"
-settings["general"]["key bindings"]["drawing-commands"][pygame.K_LCTRL and pygame.K_LSHIFT and pygame.K_z] = "redo last undo"
-settings["general"]["key bindings"]["drawing-commands"][pygame.K_LCTRL and pygame.K_DELETE] = "delete selected node"
+settings["general"]["key bindings"]["drawing-commands"]["LSHIFT c"] = "close shape" #pygame.K_LSHIFT and pygame.K_c
+settings["general"]["key bindings"]["drawing-commands"]["LCTRL o"] = "toggle overlay" #pygame.K_LCTRL and pygame.K_o
+settings["general"]["key bindings"]["drawing-commands"]["LSHIFT l v"] = "toggle vertical line" #pygame.K_LSHIFT and pygame.K_l and pygame.K_v
+settings["general"]["key bindings"]["drawing-commands"]["LSHIFT l h"] = "toggle horizontal line" #pygame.K_LSHIFT and pygame.K_l and pygame.K_h
+settings["general"]["key bindings"]["drawing-commands"]["LCTRL z"] = "undo last node" #pygame.K_LCTRL and pygame.K_z
+#settings["general"]["key bindings"]["drawing-commands"]["z LCTRL"] = "NEW COMMAND" #pygame.K_LCTRL and pygame.K_z
+# this wont work because the mods are done first in the event handler
+settings["general"]["key bindings"]["drawing-commands"]["LCTRL LSHIFT z"] = "redo last undo" #pygame.K_LCTRL and pygame.K_LSHIFT and pygame.K_z
+settings["general"]["key bindings"]["drawing-commands"]["LCTRL DEL"] = "delete selected node" #pygame.K_LCTRL and pygame.K_DELETE
+settings["general"]["key bindings"]["drawing-commands"]["ESC"] = "make disjoint" #pygame.K_ESCAPE
+# seperates what is on screen to own animation value in the json file
 
 settings["general"]["key bindings"]["animation-commands"] = {}
-settings["general"]["key bindings"]["animation-commands"][pygame.K_LCTRL and pygame.K_LSHIFT and pygame.K_r] = "reverse animation direction"
-settings["general"]["key bindings"]["animation-commands"][pygame.K_LCTRL and pygame.K_LSHIFT and pygame.K_c] = "customize animation direction" # TODO
+#pygame.K_LCTRL and pygame.K_LSHIFT and pygame.K_r
+settings["general"]["key bindings"]["animation-commands"]["LCTRL LSHIFT r"] = "reverse animation direction"
+#pygame.K_LCTRL and pygame.K_LSHIFT and pygame.K_c
+settings["general"]["key bindings"]["animation-commands"]["LCTRL LSHIFT c"] = "customize animation direction" # TODO
 #settings["general"]["key bindings"]["animation-commands"][pygame.K_LCTRL and LEFT_MOUSE] = "select node" # TODO
 
 
