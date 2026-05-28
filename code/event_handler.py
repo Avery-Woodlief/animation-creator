@@ -1,37 +1,55 @@
 import pygame
-#from commander import *
 
 class EventHandler: #TODO: take in the Drawer, *AnimationPlayer classes
     #TODO: *
 
-    def __init__(self, settings):
+    def __init__(self, settings, drawer):
+        self.drawer = drawer
+        # ------------------ Move to Drawer class?
         self.drawing_commands = settings["drawing-commands"]
         self.animation_commands = settings["animation-commands"]
+        # ------------------
         self.menu_options = settings["menu-commands"]
         self.menu_options_names = ["play current work", "drawing", "selection"] 
 
         self.current_menu_state = "main"
         self.mod_keys = settings["mod key references"]
         self.nonmod_keys = settings["nonmod key references"]
-        #print(self.mod_keys)
-        self.command = ""#Commander(settings)
-        #self.command = ""
+        self.command = ""
         self.events = []
         self.running = True
         self.window = self.window_start()
+
+        self.drag_has_begun = False
+        self.drag_has_ended = False
 
     def window_1(self):
         print("playing current working animation")
         #play_animation(settings, draw_helper.raw_animations[draw_helper.current_working_name])
         #TODO: call for the AnimationPlayer class
     def window_2(self):
-        print("in the drawing menu")
-        #TODO: call for the Drawer class
+        #print("in the drawing menu")
+        
+        for e in self.events:
+            if (not self.drag_has_begun): # condition for next dragging iteration
+                self.drag_has_ended = False
+            if (e.type == pygame.MOUSEBUTTONDOWN and (not self.drag_has_begun)):
+                self.drag_has_begun = True
+            elif ((e.type == pygame.MOUSEBUTTONUP) and (self.drag_has_begun)):
+                self.drag_has_begun = False
+                self.drag_has_ended = True
+
+            if (self.drag_has_begun and (not self.drag_has_ended)):
+                
+                self.drawer.drawing(e)
+        #print(f"self.drag_has_begun: {self.drag_has_begun}\nself.drag_has_ended: {self.drag_has_ended}")
+        #print(f"\\self.drag_has_begun: {self.drag_has_begun}\nself.drag_has_ended: {self.drag_has_ended}\\")
     def window_3(self):
         print("in the selection menu")
         #TODO: ???
     def window_start(self):
         print("in start menu")
+        self.drawer.screen.fill(self.drawer.display_settings["colors"]["color-white"])
         #TODO: ???
 
 
@@ -80,18 +98,16 @@ class EventHandler: #TODO: take in the Drawer, *AnimationPlayer classes
         for e in self.events:
             if e.type == pygame.QUIT:
                 self.running = False
-            if e.type == pygame.MOUSEBUTTONDOWN:
-                if e.button == 1:
-                    print("left mouse button")
-                if e.button == 3:
-                    print("right mouse button")
+            
             if e.type == pygame.KEYDOWN:
                 mods = e.mod
                 keys = pygame.key.get_pressed()
                 self.get_pressed_keys(mods, keys)
+            
+            self.check_menu_state()
+            self.do_menu()
+            
             self.events.remove(e)
-        self.check_menu_state()
-        self.do_menu()
         
 
 
