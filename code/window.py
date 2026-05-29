@@ -1,3 +1,4 @@
+import pygame
 
 class Window:
 
@@ -8,10 +9,18 @@ class Window:
         self.current_events = []
 
 
-    def run(self, event):
+    def run(self, event, events):
         #print("running window...")
+        #print("ITERATION")
         for button in self.children["buttons"]:
-            button.check_state(event)
+            if (not button):
+                continue
+            if (button.check_state(event) == "clicked" and (event.type != pygame.MOUSEBUTTONUP)):
+                try:
+                    events.remove(event)
+                except (ValueError):
+                    return button.action()
+                return button.action()
         return
 
     def kill(self): # for semantics

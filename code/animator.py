@@ -57,14 +57,47 @@ window_names = ["start", "animation player", "drawer", "selection"]
 
 window_buttons = {name : [] for name in window_names}
 
-window_buttons["start"] = [Button(screen, (50, 50), (25, 25), (0, 255, 255),lambda : print("start window") , ""),
-                           Button(screen, (0, screen_settings["height"]-50), (50, 50), (255, 255, 255), None, "", "images/left_arrow.png")]
+
+def go_to_next_window(current):
+
+    names = ["start", "animation player", "drawer", "selection"]
+    try:
+        return names[(names.index(current) + 1) % len(names)]
+    except:
+        return
+
+def go_to_prev_window(current):
+
+    names = ["start", "animation player", "drawer", "selection"]
+    try:
+        return names[(names.index(current) - 1) % len(names)]
+    except:
+        return
+
+def create_prev_page_btn(current):
+    return Button(screen, (0, screen_settings["height"]-50), (50, 50), (255, 255, 255), go_to_prev_window, current, "images/left_arrow.png")
+
+def create_next_page_btn(current):
+    return Button(screen, (screen_settings["width"]-50, screen_settings["height"]-50),(50, 50), (255, 255, 255), go_to_next_window, current, "images/right_arrow.png")
+
+#screen, position, size, color, func, args = "", img_path = None
+
+window_buttons["start"] = [Button(screen, (50, 50), (25, 25), (0, 255, 255),lambda : print("start window") , ""), 
+                           create_prev_page_btn("\'start\'"), 
+                           create_next_page_btn("\'start\'")]
 
 
+window_buttons["animation player"] = [Button(screen, (50, 50), (50, 50), (0, 255, 255),lambda : print("animation player button") , ""),
+                                      create_prev_page_btn("\'animation player\'"), 
+                                      create_next_page_btn("\'animation player\'")]
 
-window_buttons["animation player"] = [Button(screen, (50, 50), (50, 50), (0, 255, 255),lambda : print("animation player button") , "")]
-window_buttons["drawer"] = [Button(screen, (50, 50), (50, 50), (0, 255, 0), lambda : print("drawer button"), "")]
-window_buttons["selection"] = [Button(screen, (50, 50), (50, 50), (255, 0, 255), lambda : print("selection"), "", "images/effect_cube.png")]
+window_buttons["drawer"] = [Button(screen, (50, 50), (50, 50), (0, 255, 0), lambda : print("drawer button"), ""),
+                            create_prev_page_btn("\'drawer\'"), 
+                            create_next_page_btn("\'drawer\'")]
+
+window_buttons["selection"] = [Button(screen, (50, 50), (50, 50), (255, 0, 255), lambda : print("selection"), "","images/effect_cube.png"),
+                               create_prev_page_btn("\'selection\'"), 
+                               create_next_page_btn("\'selection\'")]
 
 window_handler = WindowHandler(screen, settings, window_names)
 for win in window_handler.acceptable_window_names:

@@ -60,7 +60,15 @@ class EventHandler:
             #print(self.window_names)
             return
         for e in self.events:
-            self.window_handler.run(self.current_window, e)
+            return_val = self.window_handler.run(self.current_window, e, self.events)
+            if (return_val in self.window_names):
+                if (return_val != self.current_window):
+                    try:
+                        self.window_handler.turn_off(self.current_window)
+                        self.window_handler.turn_on(return_val)
+                        self.current_window = return_val
+                    except (ValueError):
+                        return
         return
         
 
@@ -100,7 +108,10 @@ class EventHandler:
             self.check_window_state()
             self.do_window()
             
-            self.events.remove(e)
+            try:
+                self.events.remove(e)
+            except (ValueError): # already removed
+                continue
         
 
 

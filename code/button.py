@@ -15,6 +15,8 @@ class Button:
         self.acceptable_event_types = [pygame.MOUSEMOTION, pygame.MOUSEBUTTONDOWN]
         self.bg_color = (255, 255, 255)
         self.visible = False
+        
+
 
     def load_img(self):
         if (self.img_path):
@@ -39,17 +41,17 @@ class Button:
         if (not self.body.collidepoint(event.pos)):
             return
         if (event.type == pygame.MOUSEMOTION):
-            print("hovering")
+            return "hovering"
         if (event.type == pygame.MOUSEBUTTONDOWN):
-            self.action()
+            return "clicked"
 
     def action(self): # what does the button do
-        print("clicked")
+        #print("clicked")
         if (not self.function):
             return
+            
         if (len(self.args) == 0):
             self.function()
         else:
-            self.function(eval(self.args))
-        
-        return
+            return self.function(eval(self.args))
+       
