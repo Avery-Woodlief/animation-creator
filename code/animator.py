@@ -6,7 +6,7 @@ from animation_player import *
 from math_helper import *
 from event_handler import *
 from file_ops import *
-from window_decorator import *
+from window_handler import *
 
 
 def init_dynamic_settings(settings):
@@ -36,21 +36,32 @@ init_dynamic_settings(settings)
 pygame.init()
 screen_settings = settings["display"]["screen-size"]
 screen = pygame.display.set_mode((screen_settings["width"], screen_settings["height"]))
-
+pygame.display.set_caption("Animation Creator")
 clock = pygame.time.Clock()
 
 
 animation_name = ""#input("choose name for first animation: ") # TODO: uncomment
 
-window_decorator = WindowDecorator(settings, screen)
+#window_decorator = WindowDecorator(screen, settings)
 
-draw_helper = Drawer(settings, screen, window_decorator)
+draw_helper = Drawer(settings, screen)
 draw_helper.init_animation(animation_name)
 
-animation_player = AnimationPlayer(settings, screen, window_decorator)
+animation_player = AnimationPlayer(settings, screen)
 
 math_helper = MathMixin(settings["animation"])
-event_handler = EventHandler(settings["general"]["key bindings"], draw_helper, animation_player, window_decorator)
+
+
+window_names = ["start", "animation player", "drawer", "selection"]
+
+children = {"buttons":[], "text":[]}
+children["buttons"].append(Button(screen, (50, 50), (50, 50), (255, 255, 255)))
+
+window_handler = WindowHandler(screen, settings, window_names)
+for win in window_handler.acceptable_window_names:
+    window_handler.build(win, children)
+
+event_handler = EventHandler(settings["general"]["key bindings"], draw_helper, animation_player, window_handler)
 #, settings["animation"]
 
 

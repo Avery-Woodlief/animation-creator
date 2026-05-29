@@ -9,7 +9,7 @@ import pygame
 
 class Drawer:
 
-    def __init__(self, settings, screen, window_decorator):
+    def __init__(self, settings, screen):
         self.screen = screen
         self.display_settings = settings["display"]
         self.fonts = self.display_settings["fonts"]
@@ -21,7 +21,6 @@ class Drawer:
         self.formatted_animations = {}
         self.names = []
         self.current_working_name = ""
-        self.window_decorator = window_decorator
         
         # TODO: allow more shape options
 
