@@ -57,9 +57,14 @@ window_names = ["start", "animation player", "drawer", "selection"]
 
 window_buttons = {name : [] for name in window_names}
 
+window_buttons["start"] = [Button(screen, (50, 50), (25, 25), (0, 255, 255),lambda : print("start window") , ""),
+                           Button(screen, (0, screen_settings["height"]-50), (50, 50), (255, 255, 255), None, "", "images/left_arrow.png")]
+
+
+
 window_buttons["animation player"] = [Button(screen, (50, 50), (50, 50), (0, 255, 255),lambda : print("animation player button") , "")]
 window_buttons["drawer"] = [Button(screen, (50, 50), (50, 50), (0, 255, 0), lambda : print("drawer button"), "")]
-window_buttons["selection"] = [Button(screen, (50, 50), (50, 50), (0, 0, 255), lambda : print("selection"), "", "images/effect_cube.png")]
+window_buttons["selection"] = [Button(screen, (50, 50), (50, 50), (255, 0, 255), lambda : print("selection"), "", "images/effect_cube.png")]
 
 window_handler = WindowHandler(screen, settings, window_names)
 for win in window_handler.acceptable_window_names:
