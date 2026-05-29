@@ -85,13 +85,16 @@ class EventHandler:
             if bit in menu_key_pressed:
                 command += self.window_options[bit] + " "
         self.command = command.rstrip()
-        print(self.command)
+        #print(self.command)
+        if (self.command == "ESC"):
+            self.running = False
         
         
     def get_event(self, event):
         
         if (len(event)):
             for e in event:
+                #print(e)
                 self.events.append(e)
                 
         self.process_event()
