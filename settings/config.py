@@ -69,6 +69,7 @@ settings["general"]["key bindings"]["window-commands"] = {}
 settings["general"]["key bindings"]["window-commands"][pygame.K_1] = "animation player"
 settings["general"]["key bindings"]["window-commands"][pygame.K_2] = "drawer"
 settings["general"]["key bindings"]["window-commands"][pygame.K_3] = "selection"
+settings["general"]["key bindings"]["window-commands"][pygame.K_4] = "start"
 
 
 settings["general"]["key bindings"]["drawing-commands"] = {}

@@ -95,7 +95,8 @@
             "window-commands": {
                 "49": "animation player",
                 "50": "drawer",
-                "51": "selection"
+                "51": "selection",
+                "52": "start"
             },
             "drawing-commands": {
                 "LSHIFT c": "close shape",
