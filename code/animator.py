@@ -54,12 +54,17 @@ math_helper = MathMixin(settings["animation"])
 
 window_names = ["start", "animation player", "drawer", "selection"]
 
-children = {"buttons":[], "text":[]}
-children["buttons"].append(Button(screen, (50, 50), (50, 50), (255, 255, 255)))
+
+window_buttons = {name : [] for name in window_names}
+
+window_buttons["animation player"] = [Button(screen, (50, 50), (50, 50), (0, 255, 255))]
+window_buttons["drawer"] = [Button(screen, (50, 50), (50, 50), (0, 255, 0))]
+window_buttons["selection"] = [Button(screen, (50, 50), (50, 50), (0, 0, 255))]
 
 window_handler = WindowHandler(screen, settings, window_names)
 for win in window_handler.acceptable_window_names:
-    window_handler.build(win, children)
+    
+    window_handler.build(win, window_buttons[win], None)
 
 event_handler = EventHandler(settings["general"]["key bindings"], draw_helper, animation_player, window_handler)
 #, settings["animation"]

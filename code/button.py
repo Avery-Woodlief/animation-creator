@@ -7,8 +7,8 @@ class Button:
         self.meta_data = {"position" : position, "size": size, "color": color}
         self.body = pygame.draw.rect(self.screen, color, position + size)
         self.acceptable_event_types = [pygame.MOUSEMOTION, pygame.MOUSEBUTTONDOWN]
-        self.bg_color = (0, 0, 0)
-        self.visible = True
+        self.bg_color = (255, 255, 255)
+        self.visible = False
 
     def toggle_visibility(self):
         if (self.visible):
@@ -19,6 +19,8 @@ class Button:
             self.visible = True
 
     def check_state(self, event):
+        if (not self.visible):
+            return
         if (event.type not in self.acceptable_event_types):
             return
         if (not self.body.collidepoint(event.pos)):

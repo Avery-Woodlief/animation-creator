@@ -13,10 +13,9 @@ class EventHandler:
         self.animation_commands = settings["animation-commands"]
         # ------------------
         self.window_options = settings["window-commands"]
-        #self.window_options_names = ["play current work", "drawing", "selection"] 
         
 
-        self.current_window = "selection"
+        self.current_window = "start"
         self.mod_keys = settings["mod key references"]
         self.nonmod_keys = settings["nonmod key references"]
         self.command = ""
@@ -31,11 +30,15 @@ class EventHandler:
 
 
     def check_window_state(self):
+        
         if (self.command in self.window_names):
-            
             self.current_window = self.command
-            #self.do_menu()
+            self.window_handler.turn_on(self.current_window) 
+            #self.do_window()
             self.command = ""
+        elif (self.current_window == "start"):
+            self.window_handler.turn_on(self.current_window) 
+        self.do_window()
 
     def do_window(self):
         #self.window = None
