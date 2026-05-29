@@ -39,9 +39,10 @@ class WindowHandler:
             if (not image):
                 continue
             image.toggle_visibility()
-            print(image.img_path)
+            #print(image.img_path)
 
     def turn_on(self, name):
-        self.screen.fill(self.settings["display"]["colors"]["color-white"])
+        #self.screen.fill(self.settings["display"]["colors"]["color-white"])
+        self.screen.fill((150, 150, 150))
         self.turn_off(name)
 
