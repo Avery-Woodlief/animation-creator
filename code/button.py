@@ -2,8 +2,10 @@ import pygame
 
 class Button:
 
-    def __init__(self, screen, position, size, color):
+    def __init__(self, screen, position, size, color, func, args = ""):
         self.screen = screen
+        self.function = func
+        self.args = args
         self.meta_data = {"position" : position, "size": size, "color": color}
         self.body = pygame.draw.rect(self.screen, color, position + size)
         self.acceptable_event_types = [pygame.MOUSEMOTION, pygame.MOUSEBUTTONDOWN]
@@ -32,4 +34,9 @@ class Button:
 
     def action(self): # what does the button do
         print("clicked")
+        if (len(self.args) == 0):
+            self.function()
+        else:
+            self.function(eval(self.args))
+        
         return
