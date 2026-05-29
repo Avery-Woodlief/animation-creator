@@ -45,6 +45,8 @@ class Button:
 
     def action(self): # what does the button do
         print("clicked")
+        if (not self.function):
+            return
         if (len(self.args) == 0):
             self.function()
         else:

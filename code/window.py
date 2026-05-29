@@ -9,7 +9,7 @@ class Window:
 
 
     def run(self, event):
-        print("running window...")
+        #print("running window...")
         for button in self.children["buttons"]:
             button.check_state(event)
         return
