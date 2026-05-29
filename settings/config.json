@@ -1,8 +1,8 @@
 {
     "display": {
         "screen-size": {
-            "width": 1000,
-            "height": 700
+            "width": 1500,
+            "height": 850
         },
         "colors": {
             "color-white": [
@@ -92,9 +92,9 @@
                 "127": "DEL",
                 "27": "ESC"
             },
-            "menu-commands": {
-                "49": "play current work",
-                "50": "drawing",
+            "window-commands": {
+                "49": "animation player",
+                "50": "drawer",
                 "51": "selection"
             },
             "drawing-commands": {

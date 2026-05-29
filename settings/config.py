@@ -20,7 +20,7 @@ settings = {}
 
 settings["display"] = {}
 
-settings["display"]["screen-size"] = {"width" : 1000, "height" : 700}
+settings["display"]["screen-size"] = {"width" : 1500, "height" : 850}
 
 settings["display"]["colors"] = {}
 settings["display"]["colors"]["color-white"] = (255, 255, 255)
@@ -65,10 +65,10 @@ settings["general"]["key bindings"]["nonmod key references"][pygame.K_z] = "z"
 settings["general"]["key bindings"]["nonmod key references"][pygame.K_DELETE] = "DEL"
 settings["general"]["key bindings"]["nonmod key references"][pygame.K_ESCAPE] = "ESC"
 
-settings["general"]["key bindings"]["menu-commands"] = {}
-settings["general"]["key bindings"]["menu-commands"][pygame.K_1] = "play current work"
-settings["general"]["key bindings"]["menu-commands"][pygame.K_2] = "drawing"
-settings["general"]["key bindings"]["menu-commands"][pygame.K_3] = "selection"
+settings["general"]["key bindings"]["window-commands"] = {}
+settings["general"]["key bindings"]["window-commands"][pygame.K_1] = "animation player"
+settings["general"]["key bindings"]["window-commands"][pygame.K_2] = "drawer"
+settings["general"]["key bindings"]["window-commands"][pygame.K_3] = "selection"
 
 
 settings["general"]["key bindings"]["drawing-commands"] = {}
