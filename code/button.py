@@ -25,7 +25,7 @@ class Button:
 
     def toggle_visibility(self):
         if (self.visible):
-            self.body = pygame.draw.rect(self.screen, self.bg_color, self.meta_data["position"] + self.meta_data["size"])
+            #self.body = pygame.draw.rect(self.screen, self.bg_color, self.meta_data["position"] + self.meta_data["size"])
             self.visible = False
         else:
             self.body = pygame.draw.rect(self.screen, self.meta_data["color"], self.meta_data["position"] + self.meta_data["size"])
@@ -43,6 +43,8 @@ class Button:
         if (event.type == pygame.MOUSEMOTION):
             return "hovering"
         if (event.type == pygame.MOUSEBUTTONDOWN):
+            #self.img_path = "images/effect_cube.png"
+            #self.load_img()
             return "clicked"
 
     def action(self): # what does the button do

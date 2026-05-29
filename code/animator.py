@@ -36,7 +36,7 @@ init_dynamic_settings(settings)
 pygame.init()
 screen_settings = settings["display"]["screen-size"]
 screen = pygame.display.set_mode((screen_settings["width"], screen_settings["height"]))
-pygame.display.set_caption("Animation Creator")
+pygame.display.set_caption("start")
 clock = pygame.time.Clock()
 
 
@@ -56,6 +56,7 @@ window_names = ["start", "animation player", "drawer", "selection"]
 
 
 window_buttons = {name : [] for name in window_names}
+window_images = {name : [] for name in window_names}
 
 
 def go_to_next_window(current):
@@ -75,41 +76,50 @@ def go_to_prev_window(current):
         return
 
 def create_prev_page_btn(current):
-    return Button(screen, (0, screen_settings["height"]-50), (50, 50), (255, 255, 255), go_to_prev_window, current, "images/left_arrow.png")
+    return Button(screen, (0, screen_settings["height"]-50), (50, 50), (50,50,50), go_to_prev_window, current, "images/left_arrow.png")
 
 def create_next_page_btn(current):
-    return Button(screen, (screen_settings["width"]-50, screen_settings["height"]-50),(50, 50), (255, 255, 255), go_to_next_window, current, "images/right_arrow.png")
+    return Button(screen, (screen_settings["width"]-50, screen_settings["height"]-50),(50, 50), (50,50,50), go_to_next_window, current, "images/right_arrow.png")
+
+def create_background():
+    return Button(screen, (0, 0), (1500, 800), (255, 0, 255, 0), None, "","images/welcome_screen.png")
 
 #screen, position, size, color, func, args = "", img_path = None
 
-window_buttons["start"] = [Button(screen, (50, 50), (25, 25), (0, 255, 255),lambda : print("start window") , ""), 
+window_buttons["start"] = [Button(screen, (50, 50), (0, 0), (0, 255, 255),lambda : print("start window") , ""),
+                           create_background(),
+                           Button(screen, (50, screen_settings["height"]-50), (screen_settings["width"]-100, 50),(50, 50, 50), None, ""),
                            create_prev_page_btn("\'start\'"), 
                            create_next_page_btn("\'start\'")]
 
+#window_images["start"] = [Image(screen, (100, 100), (screen_settings["width"], screen_settings["height"]-50), "images/welcome_screen.png")]
+
 
 window_buttons["animation player"] = [Button(screen, (50, 50), (50, 50), (0, 255, 255),lambda : print("animation player button") , ""),
+                                      Button(screen, (50, screen_settings["height"]-50), (screen_settings["width"]-100, 50),(50, 50, 50), None, ""),
                                       create_prev_page_btn("\'animation player\'"), 
                                       create_next_page_btn("\'animation player\'")]
 
 window_buttons["drawer"] = [Button(screen, (50, 50), (50, 50), (0, 255, 0), lambda : print("drawer button"), ""),
+                            Button(screen, (50, screen_settings["height"]-50), (screen_settings["width"]-100, 50),(50, 50, 50), None, ""),
                             create_prev_page_btn("\'drawer\'"), 
                             create_next_page_btn("\'drawer\'")]
 
 window_buttons["selection"] = [Button(screen, (50, 50), (50, 50), (255, 0, 255), lambda : print("selection"), "","images/effect_cube.png"),
+                               Button(screen, (50, screen_settings["height"]-50), (screen_settings["width"]-100, 50),(50, 50, 50), None, ""),
                                create_prev_page_btn("\'selection\'"), 
                                create_next_page_btn("\'selection\'")]
 
 window_handler = WindowHandler(screen, settings, window_names)
 for win in window_handler.acceptable_window_names:
     
-    window_handler.build(win, window_buttons[win], None)
+    window_handler.build(win, window_buttons[win], window_images[win])
 
 event_handler = EventHandler(settings["general"]["key bindings"], draw_helper, animation_player, window_handler)
 #, settings["animation"]
 
 
 FPS = settings["animation"]["FPS-normal"]
-
 
 
 

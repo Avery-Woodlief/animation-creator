@@ -18,14 +18,12 @@ class EventHandler:
         self.current_window = ""
         self.mod_keys = settings["mod key references"]
         self.nonmod_keys = settings["nonmod key references"]
-        self.command = ""
+        self.command = "start"
         self.events = []
         self.running = True
 
         self.drag_has_begun = False
         self.drag_has_ended = False
-
-    
     
 
 
@@ -73,6 +71,7 @@ class EventHandler:
         
 
     def get_pressed_keys(self, mods, keys):
+        
         mods_pressed = [bit for bit, name in self.mod_keys.items() if mods & int(bit)] # LALT, LCTRL, LSHIFT, RALT, RCTRL, RSHIFT, ...
         keys_pressed = [bit for bit, name in self.nonmod_keys.items() if keys[int(bit)]] # l, o, p, z, ...
         menu_key_pressed = [bit for bit, name in self.window_options.items() if keys[int(bit)]] # 1, 2, 3
@@ -86,9 +85,11 @@ class EventHandler:
             if bit in menu_key_pressed:
                 command += self.window_options[bit] + " "
         self.command = command.rstrip()
+        print(self.command)
         
         
     def get_event(self, event):
+        
         if (len(event)):
             for e in event:
                 self.events.append(e)

@@ -13,13 +13,13 @@ class WindowHandler:
         self.acceptable_window_names = window_names
         self.windows = {}
 
-    def build(self, name, buttons, text):
+    def build(self, name, buttons, static_images):
         if (name not in self.acceptable_window_names):
             raise ValueError(f"{name} is not a listed window!")
 
         self.windows[name] = Window(self.screen, self.settings)
         self.windows[name].children["buttons"] = buttons
-        self.windows[name].children["text"].append(text)
+        self.windows[name].children["static-images"] = static_images
         
 
     def run(self, name, event, events):
@@ -35,7 +35,13 @@ class WindowHandler:
             if (not button):
                 continue
             button.toggle_visibility()
+        for image in self.windows[name].children["static-images"]:
+            if (not image):
+                continue
+            image.toggle_visibility()
+            print(image.img_path)
 
     def turn_on(self, name):
         self.screen.fill(self.settings["display"]["colors"]["color-white"])
         self.turn_off(name)
+

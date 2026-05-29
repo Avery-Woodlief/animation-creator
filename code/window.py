@@ -5,7 +5,7 @@ class Window:
     def __init__(self, screen, settings):
         self.screen = screen
         self.settings = settings
-        self.children = {"buttons":[], "text":[]}
+        self.children = {"buttons":[], "static_images":[]}
         self.current_events = []
 
 
@@ -18,7 +18,7 @@ class Window:
             if (button.check_state(event) == "clicked" and (event.type != pygame.MOUSEBUTTONUP)):
                 try:
                     events.remove(event)
-                except (ValueError):
+                except (ValueError): # already removed
                     return button.action()
                 return button.action()
         return
