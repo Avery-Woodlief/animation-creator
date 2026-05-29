@@ -76,13 +76,16 @@ def go_to_prev_window(current):
         return
 
 def create_prev_page_btn(current):
-    return Button(screen, (0, screen_settings["height"]-50), (50, 50), (50,50,50), go_to_prev_window, current, "images/left_arrow.png")
+    return Button(screen, (0, screen_settings["height"]-50), (50, 50), (50,50,50), go_to_prev_window, current, "images/left_arrow.png", (pygame.KEYDOWN, pygame.K_LEFT))
 
 def create_next_page_btn(current):
-    return Button(screen, (screen_settings["width"]-50, screen_settings["height"]-50),(50, 50), (50,50,50), go_to_next_window, current, "images/right_arrow.png")
+    return Button(screen, (screen_settings["width"]-50, screen_settings["height"]-50),(50, 50), (50,50,50), go_to_next_window, current, "images/right_arrow.png", (pygame.KEYDOWN, pygame.K_RIGHT))
 
 def create_background():
     return Button(screen, (0, 0), (1500, 800), (255, 0, 255, 0), None, "","images/welcome_screen.png")
+
+def create_border(img_path):
+    return [Button(screen, (screen_settings["width"]-12.5, 0), (12.5, screen_settings["height"]-50), (255, 0, 255), None, "",img_path), Button(screen, (0, screen_settings["height"]-50-12.5), (screen_settings["width"], 12.5), (255, 0, 255), None, "",img_path), Button(screen, (0, 0), (screen_settings["width"], 12.5), (255, 0, 255), None, "",img_path), Button(screen, (0, 0), (12.5, screen_settings["height"]-50), (255, 0, 255), None, "",img_path)]
 
 #screen, position, size, color, func, args = "", img_path = None
 
@@ -90,7 +93,7 @@ window_buttons["start"] = [Button(screen, (50, 50), (0, 0), (0, 255, 255),lambda
                            create_background(),
                            Button(screen, (50, screen_settings["height"]-50), (screen_settings["width"]-100, 50),(50, 50, 50), None, ""),
                            create_prev_page_btn("\'start\'"), 
-                           create_next_page_btn("\'start\'")]
+                           create_next_page_btn("\'start\'")] + create_border("images/effect_cube.png")
 
 #window_images["start"] = [Image(screen, (100, 100), (screen_settings["width"], screen_settings["height"]-50), "images/welcome_screen.png")]
 
@@ -98,17 +101,16 @@ window_buttons["start"] = [Button(screen, (50, 50), (0, 0), (0, 255, 255),lambda
 window_buttons["animation player"] = [Button(screen, (50, 50), (50, 50), (0, 255, 255),lambda : print("animation player button") , ""),
                                       Button(screen, (50, screen_settings["height"]-50), (screen_settings["width"]-100, 50),(50, 50, 50), None, ""),
                                       create_prev_page_btn("\'animation player\'"), 
-                                      create_next_page_btn("\'animation player\'")]
+                                      create_next_page_btn("\'animation player\'")] + create_border("images/effect_cube.png")
 
 window_buttons["drawer"] = [Button(screen, (50, 50), (50, 50), (0, 255, 0), lambda : print("drawer button"), ""),
                             Button(screen, (50, screen_settings["height"]-50), (screen_settings["width"]-100, 50),(50, 50, 50), None, ""),
                             create_prev_page_btn("\'drawer\'"), 
-                            create_next_page_btn("\'drawer\'")]
+                            create_next_page_btn("\'drawer\'")] + create_border("images/effect_cube.png")
 
-window_buttons["selection"] = [Button(screen, (50, 50), (50, 50), (255, 0, 255), lambda : print("selection"), "","images/effect_cube.png"),
-                               Button(screen, (50, screen_settings["height"]-50), (screen_settings["width"]-100, 50),(50, 50, 50), None, ""),
+window_buttons["selection"] = [Button(screen, (50, screen_settings["height"]-50), (screen_settings["width"]-100, 50),(50, 50, 50), None, ""),
                                create_prev_page_btn("\'selection\'"), 
-                               create_next_page_btn("\'selection\'")]
+                               create_next_page_btn("\'selection\'")] + create_border("images/effect_cube.png")
 
 window_handler = WindowHandler(screen, settings, window_names)
 for win in window_handler.acceptable_window_names:
