@@ -15,7 +15,7 @@ class EventHandler:
         self.window_options = settings["window-commands"]
         
 
-        self.current_window = "start"
+        self.current_window = ""
         self.mod_keys = settings["mod key references"]
         self.nonmod_keys = settings["nonmod key references"]
         self.command = ""
@@ -31,17 +31,34 @@ class EventHandler:
 
     def check_window_state(self):
         
+        if (self.command not in self.window_names):
+            #print(f"{self.command} not a window name")
+            return
+        
+
+        if (self.current_window == self.command):
+            #print("staying on same window, do nothing to change windows")
+            return
+
         if (self.command in self.window_names):
+            #print(f"In check_window_state...\n\ncommand = {self.command}\ncurrent_window = {self.current_window}")
+            #self.current_window = self.command
+            try:
+                self.window_handler.turn_off(self.current_window)
+            except (ValueError):
+                _ = None # do nothing at all
+            self.window_handler.turn_on(self.command)
             self.current_window = self.command
-            self.window_handler.turn_on(self.current_window) 
-            #self.do_window()
             self.command = ""
-        elif (self.current_window == "start"):
-            self.window_handler.turn_on(self.current_window) 
+         
         self.do_window()
 
     def do_window(self):
         #self.window = None
+        if (self.current_window not in self.window_names):
+            #print(self.current_window)
+            #print(self.window_names)
+            return
         for e in self.events:
             self.window_handler.run(self.current_window, e)
         return
@@ -61,11 +78,6 @@ class EventHandler:
             if bit in menu_key_pressed:
                 command += self.window_options[bit] + " "
         self.command = command.rstrip()
-        print(self.command)
-        try:
-            print(self.drawing_commands[self.command])
-        except:
-            print()
         
         
     def get_event(self, event):
