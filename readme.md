@@ -4,6 +4,8 @@ This program allows you to easily create complex or quirky animations without he
 
 This project is still in development, so please be patient for future updates. Thank you :)
 
+To run the program, make sure to go into the 'settings/' folder and do 'python3 config.py' to intit the config.json file
+
 There are two `.json` files that the Animator Creator makes:
 
 - `abstract_motion.json`
