@@ -100,18 +100,17 @@
                 "127": "DEL",
                 "27": "ESC"
             },
-            "window-options": {
-                "49": "animation player",
-                "50": "drawer",
-                "51": "selection",
-                "52": "start"
-            },
             "window-commands": {
                 "ESC": "quits program",
                 "LSHIFT b": "making window borderless",
                 "LCTRL LSHIFT b": "making window bordered"
             },
             "drawing-commands": {
+                "LSHIFT s": "begin drawing animation",
+                "LCTRL LSHIFT s": "stop drawing animation",
+                "LSHIFT e": "erasor mode",
+                "LSHIFT DEL": "delete entire animation",
+                "LCTRL LSHIFT n": "create new animation",
                 "LCTRL LSHIFT c": "open shape",
                 "LSHIFT c": "close shape",
                 "LCTRL o": "toggle overlay",
@@ -120,7 +119,7 @@
                 "LCTRL z": "undo last node",
                 "LCTRL LSHIFT z": "redo last undo",
                 "LCTRL DEL": "delete selected node",
-                "ESC": "make disjoint"
+                "LSHIFT d": "make disjoint"
             },
             "animation-commands": {
                 "LCTRL LSHIFT r": "reverse animation direction",
