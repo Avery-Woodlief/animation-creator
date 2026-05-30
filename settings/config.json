@@ -3,6 +3,11 @@
         "screen": {
             "width": 1500,
             "height": 850,
+            "background color": [
+                150,
+                150,
+                150
+            ],
             "borderless": 32,
             "bordered": 0,
             "active flag": 0

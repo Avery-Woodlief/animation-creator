@@ -21,6 +21,7 @@ settings = {}
 settings["display"] = {}
 
 settings["display"]["screen"] = {"width" : 1500, "height" : 850}
+settings["display"]["screen"]["background color"] = (150, 150, 150)
 settings["display"]["screen"]["borderless"] = pygame.NOFRAME
 settings["display"]["screen"]["bordered"] = 0
 settings["display"]["screen"]["active flag"] = 0
