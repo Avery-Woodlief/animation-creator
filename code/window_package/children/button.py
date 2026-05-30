@@ -80,7 +80,7 @@ class Button:
                 
                 if (self.click_img):
                     self.current_img = self.click_img
-                
+                    self.reload_image()
                 return "clicked"
         elif (event.type == pygame.MOUSEMOTION):
             
