@@ -102,7 +102,9 @@
                 "52": "start"
             },
             "window-commands": {
-                "ESC": "quits program"
+                "ESC": "quits program",
+                "LSHIFT b": "making window borderless",
+                "LCTRL LSHIFT b": "making window bordered"
             },
             "drawing-commands": {
                 "LCTRL LSHIFT c": "open shape",

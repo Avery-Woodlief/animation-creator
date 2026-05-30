@@ -76,6 +76,8 @@ settings["general"]["key bindings"]["window-options"][pygame.K_4] = "start"
 
 settings["general"]["key bindings"]["window-commands"] = {}
 settings["general"]["key bindings"]["window-commands"]["ESC"] = "quits program"
+settings["general"]["key bindings"]["window-commands"]["LSHIFT b"] = "making window borderless"
+settings["general"]["key bindings"]["window-commands"]["LCTRL LSHIFT b"] = "making window bordered"
 
 
 settings["general"]["key bindings"]["drawing-commands"] = {}
