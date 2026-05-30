@@ -1,12 +1,12 @@
 import json
 import pygame
 import os
-from drawer import *
-from animation_player import *
-from math_helper import *
-from event_handler import *
-from file_ops import *
-from window_handler import *
+from drawer.drawer import *
+from animation_player.animation_player import *
+from math_.math_helper import *
+from window_package.event_handler import *
+from file_io.file_ops import *
+from window_package.window_handler import *
 
 
 
@@ -41,11 +41,11 @@ pygame.display.set_caption("start")
 clock = pygame.time.Clock()
 
 
-animation_name = ""#input("choose name for first animation: ") # TODO: uncomment
-
-#window_decorator = WindowDecorator(screen, settings)
 
 draw_helper = Drawer(settings, screen)
+
+
+animation_name = ""#input("choose name for first animation: ") # TODO: uncomment
 draw_helper.init_animation(animation_name)
 
 animation_player = AnimationPlayer(settings, screen)
@@ -135,8 +135,6 @@ event_handler = EventHandler(settings["general"]["key bindings"], draw_helper, a
 #, settings["animation"]
 
 
-FPS = settings["animation"]["FPS-normal"]
-
 
 
 
@@ -145,7 +143,7 @@ while event_handler.running:
     keys = pygame.key.get_pressed()
     mouse = pygame.mouse.get_pressed()
 
-    clock.tick(120)
+    clock.tick(settings["animation"]["FPS-normal"])
 
     event_handler.get_event(pygame.event.get())
 
