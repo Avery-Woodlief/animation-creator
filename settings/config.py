@@ -104,7 +104,7 @@ settings["general"]["key bindings"]["animation-commands"]["LCTRL LSHIFT c"] = "c
 
 
 
-settings["animation"] = {"FPS-normal":60, "FPS-mouse-click":20, "frames count":10}
+settings["animation"] = {"FPS-normal":120, "FPS-mouse-click":20, "frames count":10}
 settings["animation"]["FPS-animation-player"] = 120
 settings["animation"]["FPS-mouse-drag"] = 60
 settings["animation"]["lifetime"] = settings["animation"]["frames count"]/settings["animation"]["FPS-normal"] # lifetime measured in seconds
