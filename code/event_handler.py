@@ -1,6 +1,12 @@
 import pygame
 from window_handler import *
 
+
+def init_window_commands(win_cmds):
+    win_cmds["ESC"] = "self.running = False"
+    win_cmds["LSHIFT b"] = '''self.window_handler.make_screen_borderless(self)'''
+    win_cmds["LCTRL LSHIFT b"] = '''self.window_handler.make_screen_bordered(self)'''
+
 class EventHandler:
 
     def __init__(self, settings, drawer, animation_player, window_handler):
@@ -12,9 +18,9 @@ class EventHandler:
         self.drawing_commands = settings["drawing-commands"]
         self.animation_commands = settings["animation-commands"]
         # ------------------
-        self.window_options = settings["window-commands"]
-        
-
+        self.window_options = settings["window-options"]
+        self.window_commands = settings["window-commands"]
+        init_window_commands(self.window_commands)
         self.current_window = ""
         self.mod_keys = settings["mod key references"]
         self.nonmod_keys = settings["nonmod key references"]
@@ -59,6 +65,7 @@ class EventHandler:
             return
         for e in self.events:
             return_val = self.window_handler.run(self.current_window, e, self.events)
+            #print(return_val)
             if (return_val in self.window_names):
                 if (return_val != self.current_window):
                     try:
@@ -86,8 +93,11 @@ class EventHandler:
                 command += self.window_options[bit] + " "
         self.command = command.rstrip()
         #print(self.command)
-        if (self.command == "ESC"):
-            self.running = False
+        
+    def run_for_commands(self):
+        if (self.command in self.window_commands.keys()):
+            exec(self.window_commands[self.command])
+            self.command = ""
         
         
     def get_event(self, event):
@@ -108,10 +118,11 @@ class EventHandler:
                 mods = e.mod
                 keys = pygame.key.get_pressed()
                 self.get_pressed_keys(mods, keys)
-            
+            self.run_for_commands()
             self.check_window_state()
             self.do_window()
-            
+            pygame.mouse.set_cursor(self.window_handler.settings["mouse-settings"]["active cursor"])
+            #print(self.window_handler.settings["mouse-settings"]["active cursor"])
             try:
                 self.events.remove(e)
             except (ValueError): # already removed
