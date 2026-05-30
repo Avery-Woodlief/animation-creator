@@ -40,10 +40,10 @@ def go_to_prev_window(current):
         return
 
 def create_prev_page_btn(current):
-    return Button(screen, (0, screen_settings["height"]-50), (50, 50), (50,50,50), go_to_prev_window, current, "images/left_arrow2.png", (pygame.KEYDOWN, pygame.K_LEFT))
+    return Button(screen, (0, screen_settings["height"]-50), (50, 50), (50,50,50), go_to_prev_window, current, "images/left_arrow2.png",click_events= [(pygame.MOUSEBUTTONDOWN, -1), (pygame.KEYDOWN, pygame.K_LEFT)])
 
 def create_next_page_btn(current):
-    return Button(screen, (screen_settings["width"]-50, screen_settings["height"]-50),(50, 50), (150,100,75), go_to_next_window, current, "images/right_arrow2.png", (pygame.KEYDOWN, pygame.K_RIGHT))
+    return Button(screen, (screen_settings["width"]-50, screen_settings["height"]-50),(50, 50), (150,100,75), go_to_next_window, current, "images/right_arrow2.png", click_events = [(pygame.MOUSEBUTTONDOWN, -1), (pygame.KEYDOWN, pygame.K_RIGHT)])
 
 def create_background():
     return Button(screen, (0, 0), (1500, 800), (255, 0, 255, 0), None, "","images/welcome_screen.png", clickable=False)

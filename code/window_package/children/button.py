@@ -2,7 +2,7 @@ import pygame
 
 class Button:
 
-    def __init__(self, screen, position, size, color, func, args = "", img_path = None, click_event = (pygame.MOUSEBUTTONDOWN, -1), cursor = pygame.SYSTEM_CURSOR_ARROW, clickable = True):
+    def __init__(self, screen, position, size, color, func, args = "", img_path = None, click_events = [(pygame.MOUSEBUTTONDOWN, -1)], cursor = pygame.SYSTEM_CURSOR_ARROW, clickable = True):
         self.screen = screen
         self.function = func
         self.args = args
@@ -15,9 +15,9 @@ class Button:
         self.body = pygame.draw.rect(self.screen, color, position + size)
         self.clickable = clickable
         self.cursor = cursor
-        self.click_event = click_event[0] # this is same as clicking
-        self.key = click_event[1]
-        self.acceptable_event_types = [pygame.MOUSEMOTION, click_event[0]]
+        self.click_events = [click_events[i][0] for i in range(len(click_events))]
+        self.keys = [click_events[i][1] for i in range(len(click_events))]
+        self.acceptable_event_types = [pygame.MOUSEMOTION] + self.click_events
         self.bg_color = (255, 255, 255)
         self.visible = False
         
@@ -47,27 +47,23 @@ class Button:
             return
         if (event.type not in self.acceptable_event_types):
             return
-        if (self.click_event == pygame.MOUSEBUTTONDOWN):
+        # normal mouse event handling
+        if ((event.type == pygame.MOUSEBUTTONDOWN) and (pygame.MOUSEBUTTONDOWN in self.click_events)):
             if (not self.body.collidepoint(event.pos)):
                 return
-        if (event.type == pygame.MOUSEMOTION):
+            else:
+                return "clicked"
+        elif (event.type == pygame.MOUSEMOTION):
             
             if (self.body.collidepoint(event.pos)):
                 if (self.clickable):
                     return "hovering"
 
-        if (event.type == self.click_event):
-            if (self.key == -1): # just the mouse
-                #pygame.mouse.set_cursor(self.cursor)
-                #pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_HAND)
+        if (event.type in self.click_events): # NOT a mouse click
+            if (event.key in self.keys):
                 return "clicked"
-            else:
-                try:
-                    if (event.key == self.key):
-                        #pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_HAND) not for mouse
-                        return "clicked"
-                except:
-                    return
+
+        
                 
 
     def action(self): # what does the button do
