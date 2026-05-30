@@ -20,7 +20,10 @@ settings = {}
 
 settings["display"] = {}
 
-settings["display"]["screen-size"] = {"width" : 1500, "height" : 850}
+settings["display"]["screen"] = {"width" : 1500, "height" : 850}
+settings["display"]["screen"]["borderless"] = pygame.NOFRAME
+settings["display"]["screen"]["bordered"] = 0
+settings["display"]["screen"]["active flag"] = 0
 
 settings["display"]["colors"] = {}
 settings["display"]["colors"]["color-white"] = (255, 255, 255)
@@ -65,14 +68,18 @@ settings["general"]["key bindings"]["nonmod key references"][pygame.K_z] = "z"
 settings["general"]["key bindings"]["nonmod key references"][pygame.K_DELETE] = "DEL"
 settings["general"]["key bindings"]["nonmod key references"][pygame.K_ESCAPE] = "ESC"
 
+settings["general"]["key bindings"]["window-options"] = {}
+settings["general"]["key bindings"]["window-options"][pygame.K_1] = "animation player"
+settings["general"]["key bindings"]["window-options"][pygame.K_2] = "drawer"
+settings["general"]["key bindings"]["window-options"][pygame.K_3] = "selection"
+settings["general"]["key bindings"]["window-options"][pygame.K_4] = "start"
+
 settings["general"]["key bindings"]["window-commands"] = {}
-settings["general"]["key bindings"]["window-commands"][pygame.K_1] = "animation player"
-settings["general"]["key bindings"]["window-commands"][pygame.K_2] = "drawer"
-settings["general"]["key bindings"]["window-commands"][pygame.K_3] = "selection"
-settings["general"]["key bindings"]["window-commands"][pygame.K_4] = "start"
+settings["general"]["key bindings"]["window-commands"]["ESC"] = "quits program"
 
 
 settings["general"]["key bindings"]["drawing-commands"] = {}
+settings["general"]["key bindings"]["drawing-commands"]["LCTRL LSHIFT c"] = "open shape"
 settings["general"]["key bindings"]["drawing-commands"]["LSHIFT c"] = "close shape" #pygame.K_LSHIFT and pygame.K_c
 settings["general"]["key bindings"]["drawing-commands"]["LCTRL o"] = "toggle overlay" #pygame.K_LCTRL and pygame.K_o
 settings["general"]["key bindings"]["drawing-commands"]["LSHIFT l v"] = "toggle vertical line" #pygame.K_LSHIFT and pygame.K_l and pygame.K_v
@@ -114,7 +121,19 @@ settings["drawing"] = {"connect points":"", "continuous":""}
 settings["drawing"]["connect points - static"] = False
 settings["drawing"]["continuous - static"] = False
 
-#settings["mouse-settings"]["sensitivity"] = 1
+settings["mouse-settings"] = {}
+settings["mouse-settings"]["active cursor"] = pygame.SYSTEM_CURSOR_ARROW
+settings["mouse-settings"]["cursor types"] = {}
+settings["mouse-settings"]["cursor types"]["cursor-arrow"] = pygame.SYSTEM_CURSOR_ARROW
+settings["mouse-settings"]["cursor types"]["cursor-hand"] = pygame.SYSTEM_CURSOR_HAND
+
+'''
+button.img_path = "images/effect_cube.png"
+                button.load_img()
+                # toggle_visibility done twice so it returns to visibility state as before
+                button.toggle_visibility()
+                button.toggle_visibility()
+'''
 
 with open("config.json", "w+") as file:
     json.dump(settings, file, indent=4)

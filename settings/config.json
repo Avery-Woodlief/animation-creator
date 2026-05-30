@@ -1,8 +1,11 @@
 {
     "display": {
-        "screen-size": {
+        "screen": {
             "width": 1500,
-            "height": 850
+            "height": 850,
+            "borderless": 32,
+            "bordered": 0,
+            "active flag": 0
         },
         "colors": {
             "color-white": [
@@ -92,13 +95,17 @@
                 "127": "DEL",
                 "27": "ESC"
             },
-            "window-commands": {
+            "window-options": {
                 "49": "animation player",
                 "50": "drawer",
                 "51": "selection",
                 "52": "start"
             },
+            "window-commands": {
+                "ESC": "quits program"
+            },
             "drawing-commands": {
+                "LCTRL LSHIFT c": "open shape",
                 "LSHIFT c": "close shape",
                 "LCTRL o": "toggle overlay",
                 "LSHIFT l v": "toggle vertical line",
@@ -131,5 +138,12 @@
         "continuous": "",
         "connect points - static": false,
         "continuous - static": false
+    },
+    "mouse-settings": {
+        "active cursor": 0,
+        "cursor types": {
+            "cursor-arrow": 0,
+            "cursor-hand": 11
+        }
     }
 }
