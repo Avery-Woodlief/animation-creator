@@ -9,6 +9,7 @@ from file_ops import *
 from window_handler import *
 
 
+
 def init_dynamic_settings(settings):
 
     settings["animation"]["points per segment"] = lambda pps_num : pps_num
