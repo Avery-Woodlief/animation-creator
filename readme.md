@@ -1,4 +1,4 @@
-# Welcome to the Animator Creator!
+# Welcome to the Animation Creator!
 
 This program allows you to easily create complex or quirky animations without heavy computation!
 
@@ -7,12 +7,12 @@ This project is still in development, so please be patient for future updates. T
 To run the program, make sure to go into the 'settings/' folder and do 'python3 config.py' to intit the config.json file.
 After initializing the config.json file, go into 'code/' folder and do 'python3 animator.py', this will start the program.
 
-There are two `.json` files that the Animator Creator makes:
+There are two `.json` files that the Animation Creator makes:
 
 - `abstract_motion.json`
 - `raw.json`
 
-`raw.json` simply uses the points selected in the Animator Creator, while `abstract_motion.json` uses the *sum of changes* in the coordinates up to that point.
+`raw.json` simply uses the points selected in the Animation Creator, while `abstract_motion.json` uses the *sum of changes* in the coordinates up to that point.
 
 What this means is that with `abstract_motion.json`, you can place the animation anywhere on the screen for some object.
 
