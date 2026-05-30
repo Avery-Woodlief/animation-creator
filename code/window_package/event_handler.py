@@ -34,6 +34,10 @@ class EventHandler:
 
 
     def check_window_state(self):
+        '''
+        Checks if the given command for window name is valid. (used to switch windows)
+        If valid, then does nothing if on same window or turns off current_window, then switches to the given window.
+        '''
         
         if (self.command not in self.window_names):
             #print(f"{self.command} not a window name")
@@ -54,19 +58,20 @@ class EventHandler:
             self.window_handler.turn_on(self.command)
             self.current_window = self.command
             self.command = ""
-         
-        self.do_window()
 
-    def do_window(self):
-        #self.window = None
+    def do_buttons_window(self):
+        '''
+        Used to operate the buttons for the screen accorinding to which window is currently being used.
+        Also is used to updated 'EventHandler.current_window'
+        '''
+
         if (self.current_window not in self.window_names):
-            #print(self.current_window)
-            #print(self.window_names)
+
             return
         for e in self.events:
             return_val = self.window_handler.run(self.current_window, e, self.events)
-            #print(return_val)
-            if (return_val in self.window_names):
+
+            if (return_val in self.window_names): # wont be None
                 if (return_val != self.current_window):
                     try:
                         self.window_handler.turn_off(self.current_window)
@@ -78,6 +83,9 @@ class EventHandler:
         
 
     def get_pressed_keys(self, mods, keys):
+        '''
+        Creates EventHandler.command string from keyboard input
+        '''
         
         mods_pressed = [bit for bit, name in self.mod_keys.items() if mods & int(bit)] # LALT, LCTRL, LSHIFT, RALT, RCTRL, RSHIFT, ...
         keys_pressed = [bit for bit, name in self.nonmod_keys.items() if keys[int(bit)]] # l, o, p, z, ...
@@ -101,6 +109,10 @@ class EventHandler:
         
         
     def get_event(self, event):
+        '''
+        puts event into EventHandler.events list.
+        Then proceeds to immediately use the event.
+        '''
         
         if (len(event)):
             for e in event:
@@ -110,6 +122,10 @@ class EventHandler:
         self.process_event()
 
     def process_event(self):
+        '''
+        Uses the event variables in EventHandler.Events list.
+        After each event is used, the event variable is then removed from EventHandler.events list
+        '''
         for e in self.events:
             if e.type == pygame.QUIT:
                 self.running = False
@@ -120,7 +136,7 @@ class EventHandler:
                 self.get_pressed_keys(mods, keys)
             self.run_for_commands()
             self.check_window_state()
-            self.do_window()
+            self.do_buttons_window()
             pygame.mouse.set_cursor(self.window_handler.settings["mouse-settings"]["active cursor"])
             #print(self.window_handler.settings["mouse-settings"]["active cursor"])
             try:

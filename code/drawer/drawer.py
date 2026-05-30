@@ -25,6 +25,9 @@ class Drawer:
         # TODO: allow more shape options
 
     def create_animation(self, name):
+        '''
+        initializes the needed lists for the animation that is about to begun being worked on.
+        '''
         self.names.append(name)
         self.raw_animations[name] = []
         self.formatted_animations[name] = []
@@ -33,6 +36,9 @@ class Drawer:
         self.current_working_name = name
 
     def init_animation(self, name):
+        '''
+        Can only being working on animation was this is called
+        '''
         self.create_animation(name)
         self.select_animation(name)
 
@@ -41,6 +47,9 @@ class Drawer:
             pygame.draw.circle(self.screen, (0, 0, 255), point, 10)
 
     def drawing(self, event):
+        '''
+        Uses event variable to draw what is being worked on in real time
+        '''
         if (self.draw_settings["continuous - static"] in [False, True]):
             continuous = self.draw_settings["continuous - static"]
         else:
@@ -48,7 +57,6 @@ class Drawer:
         
         
         #self.screen.fill(self.display_settings["colors"]["color-white"])
-        self.window_decorator.put_text_on_window()
         if (self.draw_settings["connect points - static"]):
             if (len(self.raw_animations[self.current_working_name]) >= 2):
                 pygame.draw.lines(self.screen, (0, 0, 255), False, self.raw_animations[self.current_working_name], 10)
