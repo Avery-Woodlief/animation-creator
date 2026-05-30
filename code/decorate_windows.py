@@ -11,7 +11,7 @@ screen = pygame.display.set_mode((screen_settings["width"], screen_settings["hei
 pygame.display.set_caption("start")
 clock = pygame.time.Clock()
 
-window_names = ["start", "animation player", "drawer", "selection"]
+window_names = ["start", "animation player", "drawer", "selection"] # dont need these in settings
 
 
 
