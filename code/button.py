@@ -2,16 +2,19 @@ import pygame
 
 class Button:
 
-    def __init__(self, screen, position, size, color, func, args = "", img_path = None, click_event = (pygame.MOUSEBUTTONDOWN, -1)):
+    def __init__(self, screen, position, size, color, func, args = "", img_path = None, click_event = (pygame.MOUSEBUTTONDOWN, -1), cursor = pygame.SYSTEM_CURSOR_ARROW, clickable = True):
         self.screen = screen
         self.function = func
         self.args = args
         self.img_path = img_path
+        self.default_img_path = self.img_path
         self.img = None
         self.meta_data = {"position" : position, "size": size, "color": color}
         self.load_img()
         
         self.body = pygame.draw.rect(self.screen, color, position + size)
+        self.clickable = clickable
+        self.cursor = cursor
         self.click_event = click_event[0] # this is same as clicking
         self.key = click_event[1]
         self.acceptable_event_types = [pygame.MOUSEMOTION, click_event[0]]
@@ -38,6 +41,8 @@ class Button:
     
 
     def check_state(self, event):
+        if (not self.clickable):
+            return
         if (not self.visible):
             return
         if (event.type not in self.acceptable_event_types):
@@ -46,16 +51,24 @@ class Button:
             if (not self.body.collidepoint(event.pos)):
                 return
         if (event.type == pygame.MOUSEMOTION):
-            return "hovering"
+            
+            if (self.body.collidepoint(event.pos)):
+                if (self.clickable):
+                    return "hovering"
+
         if (event.type == self.click_event):
             if (self.key == -1): # just the mouse
+                #pygame.mouse.set_cursor(self.cursor)
+                #pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_HAND)
                 return "clicked"
             else:
                 try:
                     if (event.key == self.key):
+                        #pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_HAND) not for mouse
                         return "clicked"
                 except:
                     return
+                
 
     def action(self): # what does the button do
         #print("clicked")
