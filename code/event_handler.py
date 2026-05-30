@@ -3,7 +3,7 @@ from window_handler import *
 
 
 def init_window_commands(win_cmds):
-    win_cmds["ESC"] = "self.running = False"
+    win_cmds["ESC"] = '''self.running = False'''
     win_cmds["LSHIFT b"] = '''self.window_handler.make_screen_borderless(self)'''
     win_cmds["LCTRL LSHIFT b"] = '''self.window_handler.make_screen_bordered(self)'''
 
