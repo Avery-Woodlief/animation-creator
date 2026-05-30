@@ -24,11 +24,11 @@ class WindowHandler:
         if (event_handler.current_window != "start"):
             event_handler.command = "start"
         else:
-            event_handler.command = "animation player"
+            event_handler.command = "animation player" # just because it's next page on right
 
         event_handler.check_window_state()
         event_handler.command = saved
-        event_handler.check_window_state()
+        event_handler.check_window_state() # twice because if just once then turns the page off, so need to do a swap
         return
             
     def make_screen_borderless(self, event_handler):
@@ -76,6 +76,6 @@ class WindowHandler:
 
     def turn_on(self, name):
         #self.screen.fill(self.settings["display"]["colors"]["color-white"])
-        self.screen.fill((150, 150, 150))
+        self.screen.fill(self.settings["display"]["screen"]["background color"])
         self.turn_off(name)
 
